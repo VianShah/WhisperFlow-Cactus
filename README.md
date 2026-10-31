@@ -118,6 +118,19 @@ own `data/log.jsonl`.
    refuses all commands. Only platform fine-tunes keep the confidence head. The
    platform run uploads your reviewed transcripts to cactuscompute.com and is
    billed; the assistant itself stays offline.
+
+   Measured local LoRA run (cloud CPU, seed data only, 1 epoch, 98 steps,
+   ~50 min, ~6 GB RAM, 63 MB `.cact`):
+
+   | Model | Seed test split (49) | Default cases (60) | Nonsense safe | Usable by gate |
+   |---|---|---|---|---|
+   | Base Needle 3 | 30/49 | 59/60 | 5/5, 11/11 | yes |
+   | Local LoRA | 33/49 | 58/60 | 5/5, 11/11 | **no** (`confidence: None`, all refused) |
+
+   The gain is small (+3), it is trained only on synthetic seed phrases, and it
+   introduced new wrong calls ("start the browser" → vscode, "exit code" →
+   close notepad). Don't use a local fine-tune; wait for a few hundred reviewed
+   real utterances and use the platform.
 5. Compare before switching, then set `[intent] weights` in `config.toml`:
    ```powershell
    python tests/eval_intent.py --cases data/finetune/test.jsonl
