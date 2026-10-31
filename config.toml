@@ -2,6 +2,9 @@
 dictate = "ctrl+alt+d"
 command = "ctrl+alt+space"
 
+[ui]
+tray = true                 # system tray icon: mode colour, pause, start with Windows, quit
+
 [speech]
 language = "en"
 max_seconds = 30
@@ -15,13 +18,15 @@ restore_delay_ms = 250     # wait after Ctrl+V before restoring old clipboard
 act_threshold = 0.75        # above this, execute silently
 confirm_threshold = 0.45    # between the two, ask first; below, refuse
 confirm_timeout_s = 6       # confirm by pressing the command hotkey again; Esc/timeout cancels
+weights = ""                # fine-tuned Needle .cact; empty = base model. Must keep the
+                            # confidence head (platform fine-tune) or every command is refused
 
 # Optional, per tool: lower the refuse/confirm boundary so a low-confidence call
 # is *offered for confirmation* instead of refused. Never makes anything run
 # without your keypress. Empty = the spec's behaviour. See README "Tuning".
 [intent.confirm_floor]
-# set_reminder = 0.15
-# find_file = 0.15
+set_reminder = 0.15
+find_file = 0.15
 
 [log]
 path = "data/log.jsonl"     # your command transcripts; safe to delete at any time

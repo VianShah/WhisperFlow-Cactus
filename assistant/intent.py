@@ -218,14 +218,18 @@ class Registry:
 
 class IntentEngine:
     def __init__(self, registry: Registry, act_threshold: float, confirm_threshold: float,
-                 confirm_floor: dict | None = None):
+                 confirm_floor: dict | None = None, weights: str | None = None):
         import needle
 
         self.confirm_floor = dict(confirm_floor or {})
         self.registry = registry
         self.act_threshold = act_threshold
         self.confirm_threshold = confirm_threshold
-        self.agent = needle.Needle(tools=registry.tools, stateless=True)
+        # weights: a fine-tuned .cact (Phase 4). A *local* LoRA fine-tune has no
+        # confidence head, so confidence is None and the gate refuses every call;
+        # only a platform fine-tune keeps the head. See README "Fine-tuning".
+        self.weights = weights or None
+        self.agent = needle.Needle(tools=registry.tools, stateless=True, weights=self.weights)
 
     @staticmethod
     def prepare(text: str) -> str:

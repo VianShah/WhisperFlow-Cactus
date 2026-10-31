@@ -93,7 +93,7 @@ def main():
     out = Tee()
     def serve():
         with redirect_stdout(out):
-            run.run_hotkeys(no_paste=True)
+            run.run_hotkeys(no_paste=True, no_tray=True)
     threading.Thread(target=serve, daemon=True).start()
     while "Ready." not in out.text():
         time.sleep(0.2)

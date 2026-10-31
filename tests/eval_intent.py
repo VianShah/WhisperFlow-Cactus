@@ -1,6 +1,8 @@
 """Accuracy + routing report for the intent layer on the real models.
 
     python tests/eval_intent.py            # typed text -> Needle
+    python tests/eval_intent.py --weights checkpoints/tuned.cact   # a fine-tuned model
+    python tests/eval_intent.py --cases data/finetune/test.jsonl   # an exported split
     python tests/eval_intent.py --voice    # espeak-ng speech -> Whistle -> Needle
     PIPER_VOICE=en_US-lessac-medium.onnx python tests/eval_intent.py --voice
                                            # neural Piper voice (far closer to a human)
@@ -54,18 +56,32 @@ def main():
     from assistant.tools.reminders import NullScheduler, Reminders, Store
 
     voice = "--voice" in sys.argv
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--voice", action="store_true")
+    ap.add_argument("--weights")
+    ap.add_argument("--cases", type=Path)
+    a = ap.parse_args()
     cfg = config.load()
     tmp = Path(tempfile.mkdtemp())
     reg = Registry(AppLauncher(allowlist(cfg), api=False), lambda: {}, SystemControl(api=False),
                    Reminders(Store(tmp / "r.db"), NullScheduler(), lambda *a: None),
                    FileSearch(everything_cli=None))
-    eng = IntentEngine(reg, cfg["intent"]["act_threshold"], cfg["intent"]["confirm_threshold"])
+    eng = IntentEngine(reg, cfg["intent"]["act_threshold"], cfg["intent"]["confirm_threshold"],
+                       weights=a.weights)
     stt = SpeechToText("en", config.load_vocabulary(cfg)) if voice else None
 
-    cases = [c.values if hasattr(c, "values") else c for c in T.CASES]
+    if a.cases:
+        import json
+        rows = [json.loads(l) for l in a.cases.read_text().splitlines() if l.strip()]
+        all_cases = [(r["query"], r["answers"][0]["name"] if r["answers"] else None,
+                      r["answers"][0]["arguments"] if r["answers"] else None) for r in rows]
+    else:
+        cases = [c.values if hasattr(c, "values") else c for c in T.CASES]
+        all_cases = cases + [(n, None, None) for n in T.NONSENSE]
     stats = defaultdict(lambda: defaultdict(int))
     misses = []
-    for q, tool, args in cases + [(n, None, None) for n in T.NONSENSE]:
+    for q, tool, args in all_cases:
         heard = stt.transcribe(speak(q)).text if voice else q
         d = eng.decide(heard)
         key = tool or "(nonsense)"
@@ -87,7 +103,9 @@ def main():
             s["wrong_" + d.route] += 1
 
     print(f"\n{'voice' if voice else 'text'} eval — act>={eng.act_threshold}, "
-          f"confirm>={eng.confirm_threshold}\n")
+          f"confirm>={eng.confirm_threshold}"
+          f"{' — weights ' + a.weights if a.weights else ' — base model'}"
+          f"{' — cases ' + str(a.cases) if a.cases else ''}\n")
     print(f"{'tool':16} {'n':>3} {'correct':>8} {'act':>5} {'confirm':>8} {'refuse':>7} "
           f"{'wrong&run':>10}")
     tot = defaultdict(int)
@@ -105,6 +123,8 @@ def main():
           f"{tot['refuse']:>7} {tot['wrong_run']:>10}")
     ns = stats["(nonsense)"]
     print(f"\nnonsense: {ns['safe']}/{ns['n']} took no action")
+    tool_only = sum(s["correct"] for k, s in stats.items() if k != "(nonsense)")
+    print(f"tool+args correct regardless of confidence: {tool_only}/{tot['n']}")
     print("\nmisses:")
     for q, heard, d in misses:
         h = f" (heard {heard!r})" if voice and heard.lower().strip(".?! ") != q else ""

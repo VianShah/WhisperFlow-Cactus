@@ -7,3 +7,8 @@ data/log.jsonl
 *.wav
 !tests/fixtures/*.wav
 data/reminders.db
+checkpoints/
+data/finetune/
+*.cact
+*.safetensors
+data/corrections.jsonl

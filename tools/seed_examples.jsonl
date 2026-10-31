@@ -1,0 +1,543 @@
+{"query": "time check", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "got the time", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "what's the time please", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "time check please", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "what's the current time please", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "what time is it now", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "what's the time now", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "what time is it for me", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "time check for me", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "what's the current time for me", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "please what time is it", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "please how late is it", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "please got the time", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "please what time is it please", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "please tell me the time now", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "please tell me the time for me", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "please how late is it for me", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "could you what time is it", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "could you what time is it now", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "could you what's the time for me", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "could you time check for me", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "could you what's the current time for me", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "could you how late is it for me", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "can you what time is it", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "can you what's the time", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "can you what's the current time", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "can you what's the time now", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "can you tell me the time now", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "can you time check now", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "can you what's the current time now", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "can you what's the time for me", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "hey, time check", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "hey, time check please", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "hey, how late is it please", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "hey, got the time please", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "hey, what time is it now", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "hey, what's the time now", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "hey, time check now", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "hey, what's the current time now", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "hey, how late is it now", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "hey, got the time now", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "hey, what's the time for me", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "hey, what's the current time for me", "answers": [{"name": "get_time", "arguments": {}}]}
+{"query": "could you open notepad for me", "answers": [{"name": "open_app", "arguments": {"name": "notepad"}}]}
+{"query": "launch notepad", "answers": [{"name": "open_app", "arguments": {"name": "notepad"}}]}
+{"query": "can you start notepad for me", "answers": [{"name": "open_app", "arguments": {"name": "notepad"}}]}
+{"query": "can you fire up notepad for me", "answers": [{"name": "open_app", "arguments": {"name": "notepad"}}]}
+{"query": "could you run notepad", "answers": [{"name": "open_app", "arguments": {"name": "notepad"}}]}
+{"query": "please close notepad", "answers": [{"name": "close_window", "arguments": {"name": "notepad"}}]}
+{"query": "could you quit notepad now", "answers": [{"name": "close_window", "arguments": {"name": "notepad"}}]}
+{"query": "can you exit notepad please", "answers": [{"name": "close_window", "arguments": {"name": "notepad"}}]}
+{"query": "hey, shut notepad", "answers": [{"name": "close_window", "arguments": {"name": "notepad"}}]}
+{"query": "please close down notepad now", "answers": [{"name": "close_window", "arguments": {"name": "notepad"}}]}
+{"query": "please switch to notepad", "answers": [{"name": "focus_window", "arguments": {"name": "notepad"}}]}
+{"query": "hey, go to notepad now", "answers": [{"name": "focus_window", "arguments": {"name": "notepad"}}]}
+{"query": "focus notepad now", "answers": [{"name": "focus_window", "arguments": {"name": "notepad"}}]}
+{"query": "hey, bring up notepad now", "answers": [{"name": "focus_window", "arguments": {"name": "notepad"}}]}
+{"query": "please show me notepad now", "answers": [{"name": "focus_window", "arguments": {"name": "notepad"}}]}
+{"query": "please jump to notepad now", "answers": [{"name": "focus_window", "arguments": {"name": "notepad"}}]}
+{"query": "please open note pad please", "answers": [{"name": "open_app", "arguments": {"name": "notepad"}}]}
+{"query": "please launch note pad for me", "answers": [{"name": "open_app", "arguments": {"name": "notepad"}}]}
+{"query": "please start note pad please", "answers": [{"name": "open_app", "arguments": {"name": "notepad"}}]}
+{"query": "hey, fire up note pad for me", "answers": [{"name": "open_app", "arguments": {"name": "notepad"}}]}
+{"query": "could you run note pad", "answers": [{"name": "open_app", "arguments": {"name": "notepad"}}]}
+{"query": "close note pad now", "answers": [{"name": "close_window", "arguments": {"name": "notepad"}}]}
+{"query": "can you quit note pad now", "answers": [{"name": "close_window", "arguments": {"name": "notepad"}}]}
+{"query": "please exit note pad now", "answers": [{"name": "close_window", "arguments": {"name": "notepad"}}]}
+{"query": "can you shut note pad now", "answers": [{"name": "close_window", "arguments": {"name": "notepad"}}]}
+{"query": "could you close down note pad", "answers": [{"name": "close_window", "arguments": {"name": "notepad"}}]}
+{"query": "please switch to note pad", "answers": [{"name": "focus_window", "arguments": {"name": "notepad"}}]}
+{"query": "please go to note pad for me", "answers": [{"name": "focus_window", "arguments": {"name": "notepad"}}]}
+{"query": "please focus note pad now", "answers": [{"name": "focus_window", "arguments": {"name": "notepad"}}]}
+{"query": "please bring up note pad for me", "answers": [{"name": "focus_window", "arguments": {"name": "notepad"}}]}
+{"query": "hey, show me note pad", "answers": [{"name": "focus_window", "arguments": {"name": "notepad"}}]}
+{"query": "can you jump to note pad now", "answers": [{"name": "focus_window", "arguments": {"name": "notepad"}}]}
+{"query": "can you launch Notepad please", "answers": [{"name": "open_app", "arguments": {"name": "notepad"}}]}
+{"query": "can you start Notepad please", "answers": [{"name": "open_app", "arguments": {"name": "notepad"}}]}
+{"query": "can you fire up Notepad now", "answers": [{"name": "open_app", "arguments": {"name": "notepad"}}]}
+{"query": "run Notepad for me", "answers": [{"name": "open_app", "arguments": {"name": "notepad"}}]}
+{"query": "can you close Notepad for me", "answers": [{"name": "close_window", "arguments": {"name": "notepad"}}]}
+{"query": "quit Notepad please", "answers": [{"name": "close_window", "arguments": {"name": "notepad"}}]}
+{"query": "please exit Notepad please", "answers": [{"name": "close_window", "arguments": {"name": "notepad"}}]}
+{"query": "shut Notepad please", "answers": [{"name": "close_window", "arguments": {"name": "notepad"}}]}
+{"query": "hey, close down Notepad for me", "answers": [{"name": "close_window", "arguments": {"name": "notepad"}}]}
+{"query": "please switch to Notepad for me", "answers": [{"name": "focus_window", "arguments": {"name": "notepad"}}]}
+{"query": "could you go to Notepad please", "answers": [{"name": "focus_window", "arguments": {"name": "notepad"}}]}
+{"query": "hey, focus Notepad please", "answers": [{"name": "focus_window", "arguments": {"name": "notepad"}}]}
+{"query": "bring up Notepad", "answers": [{"name": "focus_window", "arguments": {"name": "notepad"}}]}
+{"query": "show me Notepad please", "answers": [{"name": "focus_window", "arguments": {"name": "notepad"}}]}
+{"query": "can you jump to Notepad please", "answers": [{"name": "focus_window", "arguments": {"name": "notepad"}}]}
+{"query": "please open chrome", "answers": [{"name": "open_app", "arguments": {"name": "chrome"}}]}
+{"query": "could you launch chrome please", "answers": [{"name": "open_app", "arguments": {"name": "chrome"}}]}
+{"query": "could you start chrome please", "answers": [{"name": "open_app", "arguments": {"name": "chrome"}}]}
+{"query": "hey, fire up chrome now", "answers": [{"name": "open_app", "arguments": {"name": "chrome"}}]}
+{"query": "could you run chrome for me", "answers": [{"name": "open_app", "arguments": {"name": "chrome"}}]}
+{"query": "please close chrome", "answers": [{"name": "close_window", "arguments": {"name": "chrome"}}]}
+{"query": "could you quit chrome for me", "answers": [{"name": "close_window", "arguments": {"name": "chrome"}}]}
+{"query": "hey, exit chrome for me", "answers": [{"name": "close_window", "arguments": {"name": "chrome"}}]}
+{"query": "hey, shut chrome please", "answers": [{"name": "close_window", "arguments": {"name": "chrome"}}]}
+{"query": "hey, close down chrome please", "answers": [{"name": "close_window", "arguments": {"name": "chrome"}}]}
+{"query": "hey, switch to chrome", "answers": [{"name": "focus_window", "arguments": {"name": "chrome"}}]}
+{"query": "can you go to chrome please", "answers": [{"name": "focus_window", "arguments": {"name": "chrome"}}]}
+{"query": "hey, focus chrome", "answers": [{"name": "focus_window", "arguments": {"name": "chrome"}}]}
+{"query": "please bring up chrome please", "answers": [{"name": "focus_window", "arguments": {"name": "chrome"}}]}
+{"query": "please show me chrome for me", "answers": [{"name": "focus_window", "arguments": {"name": "chrome"}}]}
+{"query": "hey, jump to chrome", "answers": [{"name": "focus_window", "arguments": {"name": "chrome"}}]}
+{"query": "hey, open Chrome", "answers": [{"name": "open_app", "arguments": {"name": "chrome"}}]}
+{"query": "could you launch Chrome for me", "answers": [{"name": "open_app", "arguments": {"name": "chrome"}}]}
+{"query": "please fire up Chrome please", "answers": [{"name": "open_app", "arguments": {"name": "chrome"}}]}
+{"query": "could you run Chrome", "answers": [{"name": "open_app", "arguments": {"name": "chrome"}}]}
+{"query": "close Chrome for me", "answers": [{"name": "close_window", "arguments": {"name": "chrome"}}]}
+{"query": "hey, quit Chrome", "answers": [{"name": "close_window", "arguments": {"name": "chrome"}}]}
+{"query": "exit Chrome for me", "answers": [{"name": "close_window", "arguments": {"name": "chrome"}}]}
+{"query": "could you shut Chrome please", "answers": [{"name": "close_window", "arguments": {"name": "chrome"}}]}
+{"query": "could you close down Chrome for me", "answers": [{"name": "close_window", "arguments": {"name": "chrome"}}]}
+{"query": "hey, switch to Chrome for me", "answers": [{"name": "focus_window", "arguments": {"name": "chrome"}}]}
+{"query": "hey, go to Chrome please", "answers": [{"name": "focus_window", "arguments": {"name": "chrome"}}]}
+{"query": "hey, focus Chrome now", "answers": [{"name": "focus_window", "arguments": {"name": "chrome"}}]}
+{"query": "hey, bring up Chrome please", "answers": [{"name": "focus_window", "arguments": {"name": "chrome"}}]}
+{"query": "can you show me Chrome please", "answers": [{"name": "focus_window", "arguments": {"name": "chrome"}}]}
+{"query": "can you jump to Chrome", "answers": [{"name": "focus_window", "arguments": {"name": "chrome"}}]}
+{"query": "can you open google chrome for me", "answers": [{"name": "open_app", "arguments": {"name": "chrome"}}]}
+{"query": "could you launch google chrome", "answers": [{"name": "open_app", "arguments": {"name": "chrome"}}]}
+{"query": "please start google chrome for me", "answers": [{"name": "open_app", "arguments": {"name": "chrome"}}]}
+{"query": "fire up google chrome please", "answers": [{"name": "open_app", "arguments": {"name": "chrome"}}]}
+{"query": "could you run google chrome", "answers": [{"name": "open_app", "arguments": {"name": "chrome"}}]}
+{"query": "please close google chrome now", "answers": [{"name": "close_window", "arguments": {"name": "chrome"}}]}
+{"query": "please quit google chrome now", "answers": [{"name": "close_window", "arguments": {"name": "chrome"}}]}
+{"query": "please exit google chrome for me", "answers": [{"name": "close_window", "arguments": {"name": "chrome"}}]}
+{"query": "please shut google chrome", "answers": [{"name": "close_window", "arguments": {"name": "chrome"}}]}
+{"query": "can you close down google chrome for me", "answers": [{"name": "close_window", "arguments": {"name": "chrome"}}]}
+{"query": "please switch to google chrome please", "answers": [{"name": "focus_window", "arguments": {"name": "chrome"}}]}
+{"query": "please go to google chrome for me", "answers": [{"name": "focus_window", "arguments": {"name": "chrome"}}]}
+{"query": "hey, focus google chrome for me", "answers": [{"name": "focus_window", "arguments": {"name": "chrome"}}]}
+{"query": "could you bring up google chrome for me", "answers": [{"name": "focus_window", "arguments": {"name": "chrome"}}]}
+{"query": "please show me google chrome now", "answers": [{"name": "focus_window", "arguments": {"name": "chrome"}}]}
+{"query": "could you jump to google chrome", "answers": [{"name": "focus_window", "arguments": {"name": "chrome"}}]}
+{"query": "could you open the browser", "answers": [{"name": "open_app", "arguments": {"name": "chrome"}}]}
+{"query": "could you launch the browser for me", "answers": [{"name": "open_app", "arguments": {"name": "chrome"}}]}
+{"query": "can you start the browser", "answers": [{"name": "open_app", "arguments": {"name": "chrome"}}]}
+{"query": "can you fire up the browser now", "answers": [{"name": "open_app", "arguments": {"name": "chrome"}}]}
+{"query": "hey, run the browser now", "answers": [{"name": "open_app", "arguments": {"name": "chrome"}}]}
+{"query": "hey, close the browser", "answers": [{"name": "close_window", "arguments": {"name": "chrome"}}]}
+{"query": "quit the browser please", "answers": [{"name": "close_window", "arguments": {"name": "chrome"}}]}
+{"query": "exit the browser", "answers": [{"name": "close_window", "arguments": {"name": "chrome"}}]}
+{"query": "could you shut the browser now", "answers": [{"name": "close_window", "arguments": {"name": "chrome"}}]}
+{"query": "close down the browser please", "answers": [{"name": "close_window", "arguments": {"name": "chrome"}}]}
+{"query": "could you switch to the browser please", "answers": [{"name": "focus_window", "arguments": {"name": "chrome"}}]}
+{"query": "can you go to the browser now", "answers": [{"name": "focus_window", "arguments": {"name": "chrome"}}]}
+{"query": "can you focus the browser please", "answers": [{"name": "focus_window", "arguments": {"name": "chrome"}}]}
+{"query": "hey, bring up the browser for me", "answers": [{"name": "focus_window", "arguments": {"name": "chrome"}}]}
+{"query": "could you show me the browser", "answers": [{"name": "focus_window", "arguments": {"name": "chrome"}}]}
+{"query": "could you jump to the browser", "answers": [{"name": "focus_window", "arguments": {"name": "chrome"}}]}
+{"query": "please open vs code for me", "answers": [{"name": "open_app", "arguments": {"name": "vscode"}}]}
+{"query": "launch vs code now", "answers": [{"name": "open_app", "arguments": {"name": "vscode"}}]}
+{"query": "start vs code", "answers": [{"name": "open_app", "arguments": {"name": "vscode"}}]}
+{"query": "could you fire up vs code", "answers": [{"name": "open_app", "arguments": {"name": "vscode"}}]}
+{"query": "hey, run vs code please", "answers": [{"name": "open_app", "arguments": {"name": "vscode"}}]}
+{"query": "close vs code now", "answers": [{"name": "close_window", "arguments": {"name": "vscode"}}]}
+{"query": "quit vs code for me", "answers": [{"name": "close_window", "arguments": {"name": "vscode"}}]}
+{"query": "exit vs code now", "answers": [{"name": "close_window", "arguments": {"name": "vscode"}}]}
+{"query": "hey, shut vs code for me", "answers": [{"name": "close_window", "arguments": {"name": "vscode"}}]}
+{"query": "could you close down vs code please", "answers": [{"name": "close_window", "arguments": {"name": "vscode"}}]}
+{"query": "switch to vs code please", "answers": [{"name": "focus_window", "arguments": {"name": "vscode"}}]}
+{"query": "go to vs code please", "answers": [{"name": "focus_window", "arguments": {"name": "vscode"}}]}
+{"query": "could you focus vs code", "answers": [{"name": "focus_window", "arguments": {"name": "vscode"}}]}
+{"query": "please bring up vs code please", "answers": [{"name": "focus_window", "arguments": {"name": "vscode"}}]}
+{"query": "could you show me vs code now", "answers": [{"name": "focus_window", "arguments": {"name": "vscode"}}]}
+{"query": "hey, jump to vs code please", "answers": [{"name": "focus_window", "arguments": {"name": "vscode"}}]}
+{"query": "could you open VS Code for me", "answers": [{"name": "open_app", "arguments": {"name": "vscode"}}]}
+{"query": "hey, launch VS Code please", "answers": [{"name": "open_app", "arguments": {"name": "vscode"}}]}
+{"query": "could you start VS Code now", "answers": [{"name": "open_app", "arguments": {"name": "vscode"}}]}
+{"query": "fire up VS Code now", "answers": [{"name": "open_app", "arguments": {"name": "vscode"}}]}
+{"query": "run VS Code", "answers": [{"name": "open_app", "arguments": {"name": "vscode"}}]}
+{"query": "close VS Code please", "answers": [{"name": "close_window", "arguments": {"name": "vscode"}}]}
+{"query": "hey, quit VS Code for me", "answers": [{"name": "close_window", "arguments": {"name": "vscode"}}]}
+{"query": "please exit VS Code for me", "answers": [{"name": "close_window", "arguments": {"name": "vscode"}}]}
+{"query": "shut VS Code for me", "answers": [{"name": "close_window", "arguments": {"name": "vscode"}}]}
+{"query": "can you close down VS Code for me", "answers": [{"name": "close_window", "arguments": {"name": "vscode"}}]}
+{"query": "hey, switch to VS Code now", "answers": [{"name": "focus_window", "arguments": {"name": "vscode"}}]}
+{"query": "please go to VS Code please", "answers": [{"name": "focus_window", "arguments": {"name": "vscode"}}]}
+{"query": "could you focus VS Code please", "answers": [{"name": "focus_window", "arguments": {"name": "vscode"}}]}
+{"query": "please bring up VS Code for me", "answers": [{"name": "focus_window", "arguments": {"name": "vscode"}}]}
+{"query": "could you show me VS Code", "answers": [{"name": "focus_window", "arguments": {"name": "vscode"}}]}
+{"query": "please jump to VS Code", "answers": [{"name": "focus_window", "arguments": {"name": "vscode"}}]}
+{"query": "open visual studio code now", "answers": [{"name": "open_app", "arguments": {"name": "vscode"}}]}
+{"query": "can you launch visual studio code please", "answers": [{"name": "open_app", "arguments": {"name": "vscode"}}]}
+{"query": "start visual studio code", "answers": [{"name": "open_app", "arguments": {"name": "vscode"}}]}
+{"query": "can you fire up visual studio code now", "answers": [{"name": "open_app", "arguments": {"name": "vscode"}}]}
+{"query": "hey, run visual studio code please", "answers": [{"name": "open_app", "arguments": {"name": "vscode"}}]}
+{"query": "could you close visual studio code", "answers": [{"name": "close_window", "arguments": {"name": "vscode"}}]}
+{"query": "can you quit visual studio code please", "answers": [{"name": "close_window", "arguments": {"name": "vscode"}}]}
+{"query": "please exit visual studio code now", "answers": [{"name": "close_window", "arguments": {"name": "vscode"}}]}
+{"query": "can you shut visual studio code", "answers": [{"name": "close_window", "arguments": {"name": "vscode"}}]}
+{"query": "could you close down visual studio code now", "answers": [{"name": "close_window", "arguments": {"name": "vscode"}}]}
+{"query": "could you switch to visual studio code now", "answers": [{"name": "focus_window", "arguments": {"name": "vscode"}}]}
+{"query": "please go to visual studio code", "answers": [{"name": "focus_window", "arguments": {"name": "vscode"}}]}
+{"query": "could you focus visual studio code please", "answers": [{"name": "focus_window", "arguments": {"name": "vscode"}}]}
+{"query": "could you bring up visual studio code please", "answers": [{"name": "focus_window", "arguments": {"name": "vscode"}}]}
+{"query": "show me visual studio code now", "answers": [{"name": "focus_window", "arguments": {"name": "vscode"}}]}
+{"query": "can you jump to visual studio code", "answers": [{"name": "focus_window", "arguments": {"name": "vscode"}}]}
+{"query": "can you open code now", "answers": [{"name": "open_app", "arguments": {"name": "vscode"}}]}
+{"query": "hey, launch code please", "answers": [{"name": "open_app", "arguments": {"name": "vscode"}}]}
+{"query": "please start code", "answers": [{"name": "open_app", "arguments": {"name": "vscode"}}]}
+{"query": "fire up code now", "answers": [{"name": "open_app", "arguments": {"name": "vscode"}}]}
+{"query": "run code please", "answers": [{"name": "open_app", "arguments": {"name": "vscode"}}]}
+{"query": "can you close code", "answers": [{"name": "close_window", "arguments": {"name": "vscode"}}]}
+{"query": "can you quit code", "answers": [{"name": "close_window", "arguments": {"name": "vscode"}}]}
+{"query": "could you exit code now", "answers": [{"name": "close_window", "arguments": {"name": "vscode"}}]}
+{"query": "please shut code", "answers": [{"name": "close_window", "arguments": {"name": "vscode"}}]}
+{"query": "hey, close down code please", "answers": [{"name": "close_window", "arguments": {"name": "vscode"}}]}
+{"query": "hey, switch to code for me", "answers": [{"name": "focus_window", "arguments": {"name": "vscode"}}]}
+{"query": "could you go to code for me", "answers": [{"name": "focus_window", "arguments": {"name": "vscode"}}]}
+{"query": "please focus code now", "answers": [{"name": "focus_window", "arguments": {"name": "vscode"}}]}
+{"query": "hey, bring up code please", "answers": [{"name": "focus_window", "arguments": {"name": "vscode"}}]}
+{"query": "show me code for me", "answers": [{"name": "focus_window", "arguments": {"name": "vscode"}}]}
+{"query": "hey, jump to code please", "answers": [{"name": "focus_window", "arguments": {"name": "vscode"}}]}
+{"query": "hey, open spotify", "answers": [{"name": "open_app", "arguments": {"name": "spotify"}}]}
+{"query": "hey, launch spotify please", "answers": [{"name": "open_app", "arguments": {"name": "spotify"}}]}
+{"query": "start spotify", "answers": [{"name": "open_app", "arguments": {"name": "spotify"}}]}
+{"query": "fire up spotify please", "answers": [{"name": "open_app", "arguments": {"name": "spotify"}}]}
+{"query": "could you run spotify", "answers": [{"name": "open_app", "arguments": {"name": "spotify"}}]}
+{"query": "can you close spotify for me", "answers": [{"name": "close_window", "arguments": {"name": "spotify"}}]}
+{"query": "hey, quit spotify", "answers": [{"name": "close_window", "arguments": {"name": "spotify"}}]}
+{"query": "exit spotify please", "answers": [{"name": "close_window", "arguments": {"name": "spotify"}}]}
+{"query": "can you shut spotify now", "answers": [{"name": "close_window", "arguments": {"name": "spotify"}}]}
+{"query": "close down spotify for me", "answers": [{"name": "close_window", "arguments": {"name": "spotify"}}]}
+{"query": "hey, go to spotify", "answers": [{"name": "focus_window", "arguments": {"name": "spotify"}}]}
+{"query": "can you focus spotify now", "answers": [{"name": "focus_window", "arguments": {"name": "spotify"}}]}
+{"query": "bring up spotify now", "answers": [{"name": "focus_window", "arguments": {"name": "spotify"}}]}
+{"query": "please show me spotify please", "answers": [{"name": "focus_window", "arguments": {"name": "spotify"}}]}
+{"query": "please jump to spotify for me", "answers": [{"name": "focus_window", "arguments": {"name": "spotify"}}]}
+{"query": "can you open Spotify for me", "answers": [{"name": "open_app", "arguments": {"name": "spotify"}}]}
+{"query": "launch Spotify for me", "answers": [{"name": "open_app", "arguments": {"name": "spotify"}}]}
+{"query": "could you start Spotify", "answers": [{"name": "open_app", "arguments": {"name": "spotify"}}]}
+{"query": "hey, fire up Spotify please", "answers": [{"name": "open_app", "arguments": {"name": "spotify"}}]}
+{"query": "run Spotify please", "answers": [{"name": "open_app", "arguments": {"name": "spotify"}}]}
+{"query": "could you close Spotify now", "answers": [{"name": "close_window", "arguments": {"name": "spotify"}}]}
+{"query": "could you quit Spotify please", "answers": [{"name": "close_window", "arguments": {"name": "spotify"}}]}
+{"query": "exit Spotify for me", "answers": [{"name": "close_window", "arguments": {"name": "spotify"}}]}
+{"query": "shut Spotify for me", "answers": [{"name": "close_window", "arguments": {"name": "spotify"}}]}
+{"query": "could you close down Spotify", "answers": [{"name": "close_window", "arguments": {"name": "spotify"}}]}
+{"query": "please switch to Spotify for me", "answers": [{"name": "focus_window", "arguments": {"name": "spotify"}}]}
+{"query": "could you go to Spotify now", "answers": [{"name": "focus_window", "arguments": {"name": "spotify"}}]}
+{"query": "can you focus Spotify for me", "answers": [{"name": "focus_window", "arguments": {"name": "spotify"}}]}
+{"query": "can you bring up Spotify", "answers": [{"name": "focus_window", "arguments": {"name": "spotify"}}]}
+{"query": "hey, show me Spotify please", "answers": [{"name": "focus_window", "arguments": {"name": "spotify"}}]}
+{"query": "could you jump to Spotify", "answers": [{"name": "focus_window", "arguments": {"name": "spotify"}}]}
+{"query": "can you set volume to 0", "answers": [{"name": "set_volume", "arguments": {"level": 0}}]}
+{"query": "hey, volume 0", "answers": [{"name": "set_volume", "arguments": {"level": 0}}]}
+{"query": "could you put the sound at 0", "answers": [{"name": "set_volume", "arguments": {"level": 0}}]}
+{"query": "please change volume to 0%", "answers": [{"name": "set_volume", "arguments": {"level": 0}}]}
+{"query": "hey, set volume to 5", "answers": [{"name": "set_volume", "arguments": {"level": 5}}]}
+{"query": "could you volume 5", "answers": [{"name": "set_volume", "arguments": {"level": 5}}]}
+{"query": "hey, turn the volume to 5 percent", "answers": [{"name": "set_volume", "arguments": {"level": 5}}]}
+{"query": "put the sound at 5", "answers": [{"name": "set_volume", "arguments": {"level": 5}}]}
+{"query": "volume ten", "answers": [{"name": "set_volume", "arguments": {"level": 10}}]}
+{"query": "can you turn the volume to ten percent", "answers": [{"name": "set_volume", "arguments": {"level": 10}}]}
+{"query": "please change volume to ten%", "answers": [{"name": "set_volume", "arguments": {"level": 10}}]}
+{"query": "set volume to 15", "answers": [{"name": "set_volume", "arguments": {"level": 15}}]}
+{"query": "could you turn the volume to 15 percent", "answers": [{"name": "set_volume", "arguments": {"level": 15}}]}
+{"query": "please change volume to 15%", "answers": [{"name": "set_volume", "arguments": {"level": 15}}]}
+{"query": "could you volume 20", "answers": [{"name": "set_volume", "arguments": {"level": 20}}]}
+{"query": "can you turn the volume to 20 percent", "answers": [{"name": "set_volume", "arguments": {"level": 20}}]}
+{"query": "could you set volume to twenty five", "answers": [{"name": "set_volume", "arguments": {"level": 25}}]}
+{"query": "turn the volume to twenty five percent", "answers": [{"name": "set_volume", "arguments": {"level": 25}}]}
+{"query": "please change volume to twenty five%", "answers": [{"name": "set_volume", "arguments": {"level": 25}}]}
+{"query": "hey, set volume to 35", "answers": [{"name": "set_volume", "arguments": {"level": 35}}]}
+{"query": "could you volume 35", "answers": [{"name": "set_volume", "arguments": {"level": 35}}]}
+{"query": "put the sound at 35", "answers": [{"name": "set_volume", "arguments": {"level": 35}}]}
+{"query": "can you change volume to 40%", "answers": [{"name": "set_volume", "arguments": {"level": 40}}]}
+{"query": "turn the volume to 45 percent", "answers": [{"name": "set_volume", "arguments": {"level": 45}}]}
+{"query": "could you set volume to 55", "answers": [{"name": "set_volume", "arguments": {"level": 55}}]}
+{"query": "could you volume 55", "answers": [{"name": "set_volume", "arguments": {"level": 55}}]}
+{"query": "please turn the volume to 55 percent", "answers": [{"name": "set_volume", "arguments": {"level": 55}}]}
+{"query": "hey, put the sound at 55", "answers": [{"name": "set_volume", "arguments": {"level": 55}}]}
+{"query": "hey, volume sixty", "answers": [{"name": "set_volume", "arguments": {"level": 60}}]}
+{"query": "please put the sound at sixty", "answers": [{"name": "set_volume", "arguments": {"level": 60}}]}
+{"query": "could you change volume to sixty%", "answers": [{"name": "set_volume", "arguments": {"level": 60}}]}
+{"query": "please set volume to 65", "answers": [{"name": "set_volume", "arguments": {"level": 65}}]}
+{"query": "please turn the volume to 65 percent", "answers": [{"name": "set_volume", "arguments": {"level": 65}}]}
+{"query": "put the sound at 65", "answers": [{"name": "set_volume", "arguments": {"level": 65}}]}
+{"query": "could you change volume to 65%", "answers": [{"name": "set_volume", "arguments": {"level": 65}}]}
+{"query": "can you put the sound at seventy", "answers": [{"name": "set_volume", "arguments": {"level": 70}}]}
+{"query": "set volume to seventy five", "answers": [{"name": "set_volume", "arguments": {"level": 75}}]}
+{"query": "hey, volume seventy five", "answers": [{"name": "set_volume", "arguments": {"level": 75}}]}
+{"query": "hey, put the sound at seventy five", "answers": [{"name": "set_volume", "arguments": {"level": 75}}]}
+{"query": "please volume 85", "answers": [{"name": "set_volume", "arguments": {"level": 85}}]}
+{"query": "can you turn the volume to 85 percent", "answers": [{"name": "set_volume", "arguments": {"level": 85}}]}
+{"query": "could you put the sound at 85", "answers": [{"name": "set_volume", "arguments": {"level": 85}}]}
+{"query": "set volume to 90", "answers": [{"name": "set_volume", "arguments": {"level": 90}}]}
+{"query": "can you volume 90", "answers": [{"name": "set_volume", "arguments": {"level": 90}}]}
+{"query": "put the sound at 90", "answers": [{"name": "set_volume", "arguments": {"level": 90}}]}
+{"query": "hey, change volume to 90%", "answers": [{"name": "set_volume", "arguments": {"level": 90}}]}
+{"query": "volume 95", "answers": [{"name": "set_volume", "arguments": {"level": 95}}]}
+{"query": "please turn the volume to 95 percent", "answers": [{"name": "set_volume", "arguments": {"level": 95}}]}
+{"query": "hey, put the sound at 100", "answers": [{"name": "set_volume", "arguments": {"level": 100}}]}
+{"query": "mute", "answers": [{"name": "set_volume", "arguments": {"level": 0}}]}
+{"query": "mute the sound", "answers": [{"name": "set_volume", "arguments": {"level": 0}}]}
+{"query": "silence the volume", "answers": [{"name": "set_volume", "arguments": {"level": 0}}]}
+{"query": "volume off", "answers": [{"name": "set_volume", "arguments": {"level": 0}}]}
+{"query": "max volume", "answers": [{"name": "set_volume", "arguments": {"level": 100}}]}
+{"query": "volume all the way up", "answers": [{"name": "set_volume", "arguments": {"level": 100}}]}
+{"query": "full volume", "answers": [{"name": "set_volume", "arguments": {"level": 100}}]}
+{"query": "lock", "answers": [{"name": "lock_screen", "arguments": {}}]}
+{"query": "please lock the computer", "answers": [{"name": "lock_screen", "arguments": {}}]}
+{"query": "please lock the pc", "answers": [{"name": "lock_screen", "arguments": {}}]}
+{"query": "hey, lock this machine", "answers": [{"name": "lock_screen", "arguments": {}}]}
+{"query": "lock up", "answers": [{"name": "lock_screen", "arguments": {}}]}
+{"query": "could you lock my laptop", "answers": [{"name": "lock_screen", "arguments": {}}]}
+{"query": "please lock the workstation", "answers": [{"name": "lock_screen", "arguments": {}}]}
+{"query": "could you turn the monitor off", "answers": [{"name": "sleep_display", "arguments": {}}]}
+{"query": "hey, switch off the display", "answers": [{"name": "sleep_display", "arguments": {}}]}
+{"query": "can you screen off", "answers": [{"name": "sleep_display", "arguments": {}}]}
+{"query": "display off", "answers": [{"name": "sleep_display", "arguments": {}}]}
+{"query": "turn off my screen", "answers": [{"name": "sleep_display", "arguments": {}}]}
+{"query": "blank the screen", "answers": [{"name": "sleep_display", "arguments": {}}]}
+{"query": "could you sleep the display", "answers": [{"name": "sleep_display", "arguments": {}}]}
+{"query": "hey, power off the monitor", "answers": [{"name": "sleep_display", "arguments": {}}]}
+{"query": "create a reminder tonight at 8 to call the dentist", "answers": [{"name": "set_reminder", "arguments": {"text": "call the dentist", "when": "tonight at 8"}}]}
+{"query": "remind me to call the dentist this evening", "answers": [{"name": "set_reminder", "arguments": {"text": "call the dentist", "when": "this evening"}}]}
+{"query": "remind me to call the dentist tomorrow at 9", "answers": [{"name": "set_reminder", "arguments": {"text": "call the dentist", "when": "tomorrow at 9"}}]}
+{"query": "create a reminder in half an hour to call the dentist", "answers": [{"name": "set_reminder", "arguments": {"text": "call the dentist", "when": "in half an hour"}}]}
+{"query": "remind me on monday at 10 to pay rent", "answers": [{"name": "set_reminder", "arguments": {"text": "pay rent", "when": "on monday at 10"}}]}
+{"query": "next tuesday at 2 pm remind me to pay rent", "answers": [{"name": "set_reminder", "arguments": {"text": "pay rent", "when": "next tuesday at 2 pm"}}]}
+{"query": "create a reminder tomorrow at 9 to pay rent", "answers": [{"name": "set_reminder", "arguments": {"text": "pay rent", "when": "tomorrow at 9"}}]}
+{"query": "remind me tomorrow at 9 am to pay rent", "answers": [{"name": "set_reminder", "arguments": {"text": "pay rent", "when": "tomorrow at 9 am"}}]}
+{"query": "set a reminder to water the plants at 5 pm", "answers": [{"name": "set_reminder", "arguments": {"text": "water the plants", "when": "at 5 pm"}}]}
+{"query": "remind me to water the plants in 10 minutes", "answers": [{"name": "set_reminder", "arguments": {"text": "water the plants", "when": "in 10 minutes"}}]}
+{"query": "remind me to water the plants tonight at 8", "answers": [{"name": "set_reminder", "arguments": {"text": "water the plants", "when": "tonight at 8"}}]}
+{"query": "remind me tomorrow morning to water the plants", "answers": [{"name": "set_reminder", "arguments": {"text": "water the plants", "when": "tomorrow morning"}}]}
+{"query": "remind me at 3 to send the invoice", "answers": [{"name": "set_reminder", "arguments": {"text": "send the invoice", "when": "at 3"}}]}
+{"query": "in 45 minutes remind me to send the invoice", "answers": [{"name": "set_reminder", "arguments": {"text": "send the invoice", "when": "in 45 minutes"}}]}
+{"query": "set a reminder to send the invoice in an hour", "answers": [{"name": "set_reminder", "arguments": {"text": "send the invoice", "when": "in an hour"}}]}
+{"query": "remind me tomorrow at 9 to send the invoice", "answers": [{"name": "set_reminder", "arguments": {"text": "send the invoice", "when": "tomorrow at 9"}}]}
+{"query": "at 3 remind me to pick up the kids", "answers": [{"name": "set_reminder", "arguments": {"text": "pick up the kids", "when": "at 3"}}]}
+{"query": "set a reminder to pick up the kids in an hour", "answers": [{"name": "set_reminder", "arguments": {"text": "pick up the kids", "when": "in an hour"}}]}
+{"query": "tomorrow morning remind me to pick up the kids", "answers": [{"name": "set_reminder", "arguments": {"text": "pick up the kids", "when": "tomorrow morning"}}]}
+{"query": "remind me tomorrow at 9 am to pick up the kids", "answers": [{"name": "set_reminder", "arguments": {"text": "pick up the kids", "when": "tomorrow at 9 am"}}]}
+{"query": "create a reminder in 10 minutes to join the standup", "answers": [{"name": "set_reminder", "arguments": {"text": "join the standup", "when": "in 10 minutes"}}]}
+{"query": "remind me to join the standup on monday at 10", "answers": [{"name": "set_reminder", "arguments": {"text": "join the standup", "when": "on monday at 10"}}]}
+{"query": "remind me tomorrow morning to join the standup", "answers": [{"name": "set_reminder", "arguments": {"text": "join the standup", "when": "tomorrow morning"}}]}
+{"query": "in 45 minutes remind me to join the standup", "answers": [{"name": "set_reminder", "arguments": {"text": "join the standup", "when": "in 45 minutes"}}]}
+{"query": "remind me tonight at 8 to take my medicine", "answers": [{"name": "set_reminder", "arguments": {"text": "take my medicine", "when": "tonight at 8"}}]}
+{"query": "remind me on monday at 10 to take my medicine", "answers": [{"name": "set_reminder", "arguments": {"text": "take my medicine", "when": "on monday at 10"}}]}
+{"query": "this evening remind me to take my medicine", "answers": [{"name": "set_reminder", "arguments": {"text": "take my medicine", "when": "this evening"}}]}
+{"query": "remind me in 45 minutes to take my medicine", "answers": [{"name": "set_reminder", "arguments": {"text": "take my medicine", "when": "in 45 minutes"}}]}
+{"query": "at 7:30 remind me to book flights", "answers": [{"name": "set_reminder", "arguments": {"text": "book flights", "when": "at 7:30"}}]}
+{"query": "create a reminder on monday at 10 to book flights", "answers": [{"name": "set_reminder", "arguments": {"text": "book flights", "when": "on monday at 10"}}]}
+{"query": "remind me in an hour to book flights", "answers": [{"name": "set_reminder", "arguments": {"text": "book flights", "when": "in an hour"}}]}
+{"query": "remind me at 3 to book flights", "answers": [{"name": "set_reminder", "arguments": {"text": "book flights", "when": "at 3"}}]}
+{"query": "remind me to email Priya at 3", "answers": [{"name": "set_reminder", "arguments": {"text": "email Priya", "when": "at 3"}}]}
+{"query": "create a reminder in 45 minutes to email Priya", "answers": [{"name": "set_reminder", "arguments": {"text": "email Priya", "when": "in 45 minutes"}}]}
+{"query": "remind me next tuesday at 2 pm to email Priya", "answers": [{"name": "set_reminder", "arguments": {"text": "email Priya", "when": "next tuesday at 2 pm"}}]}
+{"query": "friday at noon remind me to email Priya", "answers": [{"name": "set_reminder", "arguments": {"text": "email Priya", "when": "friday at noon"}}]}
+{"query": "remind me in an hour to review the contract", "answers": [{"name": "set_reminder", "arguments": {"text": "review the contract", "when": "in an hour"}}]}
+{"query": "tonight at 8 remind me to review the contract", "answers": [{"name": "set_reminder", "arguments": {"text": "review the contract", "when": "tonight at 8"}}]}
+{"query": "remind me to review the contract in 10 minutes", "answers": [{"name": "set_reminder", "arguments": {"text": "review the contract", "when": "in 10 minutes"}}]}
+{"query": "remind me to review the contract on monday at 10", "answers": [{"name": "set_reminder", "arguments": {"text": "review the contract", "when": "on monday at 10"}}]}
+{"query": "set a reminder to feed the cat tomorrow at 9 am", "answers": [{"name": "set_reminder", "arguments": {"text": "feed the cat", "when": "tomorrow at 9 am"}}]}
+{"query": "remind me to feed the cat this evening", "answers": [{"name": "set_reminder", "arguments": {"text": "feed the cat", "when": "this evening"}}]}
+{"query": "remind me to feed the cat at 5 pm", "answers": [{"name": "set_reminder", "arguments": {"text": "feed the cat", "when": "at 5 pm"}}]}
+{"query": "remind me tomorrow morning to feed the cat", "answers": [{"name": "set_reminder", "arguments": {"text": "feed the cat", "when": "tomorrow morning"}}]}
+{"query": "create a reminder friday at noon to stretch", "answers": [{"name": "set_reminder", "arguments": {"text": "stretch", "when": "friday at noon"}}]}
+{"query": "tonight at 8 remind me to stretch", "answers": [{"name": "set_reminder", "arguments": {"text": "stretch", "when": "tonight at 8"}}]}
+{"query": "remind me to stretch in 2 hours", "answers": [{"name": "set_reminder", "arguments": {"text": "stretch", "when": "in 2 hours"}}]}
+{"query": "set a reminder to stretch in three days", "answers": [{"name": "set_reminder", "arguments": {"text": "stretch", "when": "in three days"}}]}
+{"query": "remind me this evening to back up the laptop", "answers": [{"name": "set_reminder", "arguments": {"text": "back up the laptop", "when": "this evening"}}]}
+{"query": "remind me to back up the laptop tomorrow morning", "answers": [{"name": "set_reminder", "arguments": {"text": "back up the laptop", "when": "tomorrow morning"}}]}
+{"query": "remind me to back up the laptop tomorrow at 9 am", "answers": [{"name": "set_reminder", "arguments": {"text": "back up the laptop", "when": "tomorrow at 9 am"}}]}
+{"query": "remind me to back up the laptop at 5 pm", "answers": [{"name": "set_reminder", "arguments": {"text": "back up the laptop", "when": "at 5 pm"}}]}
+{"query": "remind me to buy milk at 7:30", "answers": [{"name": "set_reminder", "arguments": {"text": "buy milk", "when": "at 7:30"}}]}
+{"query": "create a reminder in 2 hours to buy milk", "answers": [{"name": "set_reminder", "arguments": {"text": "buy milk", "when": "in 2 hours"}}]}
+{"query": "remind me tomorrow at 9 am to buy milk", "answers": [{"name": "set_reminder", "arguments": {"text": "buy milk", "when": "tomorrow at 9 am"}}]}
+{"query": "tonight at 8 remind me to buy milk", "answers": [{"name": "set_reminder", "arguments": {"text": "buy milk", "when": "tonight at 8"}}]}
+{"query": "tomorrow morning remind me to check on the build", "answers": [{"name": "set_reminder", "arguments": {"text": "check on the build", "when": "tomorrow morning"}}]}
+{"query": "remind me to check on the build on monday at 10", "answers": [{"name": "set_reminder", "arguments": {"text": "check on the build", "when": "on monday at 10"}}]}
+{"query": "remind me to check on the build in 45 minutes", "answers": [{"name": "set_reminder", "arguments": {"text": "check on the build", "when": "in 45 minutes"}}]}
+{"query": "this evening remind me to check on the build", "answers": [{"name": "set_reminder", "arguments": {"text": "check on the build", "when": "this evening"}}]}
+{"query": "remind me tonight at 8 to reply to Arjun", "answers": [{"name": "set_reminder", "arguments": {"text": "reply to Arjun", "when": "tonight at 8"}}]}
+{"query": "set a reminder to reply to Arjun tomorrow morning", "answers": [{"name": "set_reminder", "arguments": {"text": "reply to Arjun", "when": "tomorrow morning"}}]}
+{"query": "set a reminder to reply to Arjun at 7:30", "answers": [{"name": "set_reminder", "arguments": {"text": "reply to Arjun", "when": "at 7:30"}}]}
+{"query": "at 5 pm remind me to reply to Arjun", "answers": [{"name": "set_reminder", "arguments": {"text": "reply to Arjun", "when": "at 5 pm"}}]}
+{"query": "in 10 minutes remind me to submit timesheet", "answers": [{"name": "set_reminder", "arguments": {"text": "submit timesheet", "when": "in 10 minutes"}}]}
+{"query": "remind me to submit timesheet in 45 minutes", "answers": [{"name": "set_reminder", "arguments": {"text": "submit timesheet", "when": "in 45 minutes"}}]}
+{"query": "in half an hour remind me to submit timesheet", "answers": [{"name": "set_reminder", "arguments": {"text": "submit timesheet", "when": "in half an hour"}}]}
+{"query": "remind me to submit timesheet this evening", "answers": [{"name": "set_reminder", "arguments": {"text": "submit timesheet", "when": "this evening"}}]}
+{"query": "show my reminders", "answers": [{"name": "list_reminders", "arguments": {}}]}
+{"query": "list reminders", "answers": [{"name": "list_reminders", "arguments": {}}]}
+{"query": "what reminders do I have", "answers": [{"name": "list_reminders", "arguments": {}}]}
+{"query": "any reminders", "answers": [{"name": "list_reminders", "arguments": {}}]}
+{"query": "read out my reminders", "answers": [{"name": "list_reminders", "arguments": {}}]}
+{"query": "what am I being reminded about", "answers": [{"name": "list_reminders", "arguments": {}}]}
+{"query": "upcoming reminders", "answers": [{"name": "list_reminders", "arguments": {}}]}
+{"query": "delete reminder 1", "answers": [{"name": "cancel_reminder", "arguments": {"id": 1}}]}
+{"query": "remove reminder number 1", "answers": [{"name": "cancel_reminder", "arguments": {"id": 1}}]}
+{"query": "cancel reminder number 1", "answers": [{"name": "cancel_reminder", "arguments": {"id": 1}}]}
+{"query": "cancel reminder 2", "answers": [{"name": "cancel_reminder", "arguments": {"id": 2}}]}
+{"query": "remove reminder number 2", "answers": [{"name": "cancel_reminder", "arguments": {"id": 2}}]}
+{"query": "cancel reminder three", "answers": [{"name": "cancel_reminder", "arguments": {"id": 3}}]}
+{"query": "delete reminder 4", "answers": [{"name": "cancel_reminder", "arguments": {"id": 4}}]}
+{"query": "remove reminder number five", "answers": [{"name": "cancel_reminder", "arguments": {"id": 5}}]}
+{"query": "get rid of reminder five", "answers": [{"name": "cancel_reminder", "arguments": {"id": 5}}]}
+{"query": "cancel reminder six", "answers": [{"name": "cancel_reminder", "arguments": {"id": 6}}]}
+{"query": "remove reminder number six", "answers": [{"name": "cancel_reminder", "arguments": {"id": 6}}]}
+{"query": "cancel reminder number six", "answers": [{"name": "cancel_reminder", "arguments": {"id": 6}}]}
+{"query": "cancel reminder number 7", "answers": [{"name": "cancel_reminder", "arguments": {"id": 7}}]}
+{"query": "get rid of reminder 7", "answers": [{"name": "cancel_reminder", "arguments": {"id": 7}}]}
+{"query": "cancel reminder number 8", "answers": [{"name": "cancel_reminder", "arguments": {"id": 8}}]}
+{"query": "get rid of reminder 8", "answers": [{"name": "cancel_reminder", "arguments": {"id": 8}}]}
+{"query": "cancel reminder 9", "answers": [{"name": "cancel_reminder", "arguments": {"id": 9}}]}
+{"query": "remove reminder number 9", "answers": [{"name": "cancel_reminder", "arguments": {"id": 9}}]}
+{"query": "cancel reminder number 9", "answers": [{"name": "cancel_reminder", "arguments": {"id": 9}}]}
+{"query": "cancel reminder ten", "answers": [{"name": "cancel_reminder", "arguments": {"id": 10}}]}
+{"query": "delete reminder ten", "answers": [{"name": "cancel_reminder", "arguments": {"id": 10}}]}
+{"query": "get rid of reminder ten", "answers": [{"name": "cancel_reminder", "arguments": {"id": 10}}]}
+{"query": "cancel reminder number 11", "answers": [{"name": "cancel_reminder", "arguments": {"id": 11}}]}
+{"query": "get rid of reminder 11", "answers": [{"name": "cancel_reminder", "arguments": {"id": 11}}]}
+{"query": "cancel reminder 12", "answers": [{"name": "cancel_reminder", "arguments": {"id": 12}}]}
+{"query": "delete reminder 12", "answers": [{"name": "cancel_reminder", "arguments": {"id": 12}}]}
+{"query": "remove reminder number 12", "answers": [{"name": "cancel_reminder", "arguments": {"id": 12}}]}
+{"query": "cancel reminder number 12", "answers": [{"name": "cancel_reminder", "arguments": {"id": 12}}]}
+{"query": "get rid of reminder 12", "answers": [{"name": "cancel_reminder", "arguments": {"id": 12}}]}
+{"query": "look for the invoice", "answers": [{"name": "find_file", "arguments": {"query": "invoice"}}]}
+{"query": "search my files for invoice", "answers": [{"name": "find_file", "arguments": {"query": "invoice"}}]}
+{"query": "find my invoice", "answers": [{"name": "find_file", "arguments": {"query": "invoice"}}]}
+{"query": "find my budget", "answers": [{"name": "find_file", "arguments": {"query": "budget"}}]}
+{"query": "where is my budget", "answers": [{"name": "find_file", "arguments": {"query": "budget"}}]}
+{"query": "search for budget", "answers": [{"name": "find_file", "arguments": {"query": "budget"}}]}
+{"query": "search my files for budget", "answers": [{"name": "find_file", "arguments": {"query": "budget"}}]}
+{"query": "where is my tax return", "answers": [{"name": "find_file", "arguments": {"query": "tax return"}}]}
+{"query": "locate the tax return file", "answers": [{"name": "find_file", "arguments": {"query": "tax return"}}]}
+{"query": "find tax return", "answers": [{"name": "find_file", "arguments": {"query": "tax return"}}]}
+{"query": "search my files for tax return", "answers": [{"name": "find_file", "arguments": {"query": "tax return"}}]}
+{"query": "find resume", "answers": [{"name": "find_file", "arguments": {"query": "resume"}}]}
+{"query": "search my files for resume", "answers": [{"name": "find_file", "arguments": {"query": "resume"}}]}
+{"query": "find the resume document", "answers": [{"name": "find_file", "arguments": {"query": "resume"}}]}
+{"query": "where is my resume", "answers": [{"name": "find_file", "arguments": {"query": "resume"}}]}
+{"query": "where is my contract", "answers": [{"name": "find_file", "arguments": {"query": "contract"}}]}
+{"query": "find the contract document", "answers": [{"name": "find_file", "arguments": {"query": "contract"}}]}
+{"query": "search my files for contract", "answers": [{"name": "find_file", "arguments": {"query": "contract"}}]}
+{"query": "search for contract", "answers": [{"name": "find_file", "arguments": {"query": "contract"}}]}
+{"query": "find meeting notes", "answers": [{"name": "find_file", "arguments": {"query": "meeting notes"}}]}
+{"query": "search for meeting notes", "answers": [{"name": "find_file", "arguments": {"query": "meeting notes"}}]}
+{"query": "find my meeting notes", "answers": [{"name": "find_file", "arguments": {"query": "meeting notes"}}]}
+{"query": "search my files for meeting notes", "answers": [{"name": "find_file", "arguments": {"query": "meeting notes"}}]}
+{"query": "find passport scan", "answers": [{"name": "find_file", "arguments": {"query": "passport scan"}}]}
+{"query": "find my passport scan", "answers": [{"name": "find_file", "arguments": {"query": "passport scan"}}]}
+{"query": "look for the passport scan", "answers": [{"name": "find_file", "arguments": {"query": "passport scan"}}]}
+{"query": "locate the passport scan file", "answers": [{"name": "find_file", "arguments": {"query": "passport scan"}}]}
+{"query": "where is my presentation", "answers": [{"name": "find_file", "arguments": {"query": "presentation"}}]}
+{"query": "find presentation", "answers": [{"name": "find_file", "arguments": {"query": "presentation"}}]}
+{"query": "search for presentation", "answers": [{"name": "find_file", "arguments": {"query": "presentation"}}]}
+{"query": "look for the presentation", "answers": [{"name": "find_file", "arguments": {"query": "presentation"}}]}
+{"query": "search for receipts", "answers": [{"name": "find_file", "arguments": {"query": "receipts"}}]}
+{"query": "where is my receipts", "answers": [{"name": "find_file", "arguments": {"query": "receipts"}}]}
+{"query": "look for the receipts", "answers": [{"name": "find_file", "arguments": {"query": "receipts"}}]}
+{"query": "search my files for receipts", "answers": [{"name": "find_file", "arguments": {"query": "receipts"}}]}
+{"query": "find lease agreement", "answers": [{"name": "find_file", "arguments": {"query": "lease agreement"}}]}
+{"query": "search my files for lease agreement", "answers": [{"name": "find_file", "arguments": {"query": "lease agreement"}}]}
+{"query": "locate the lease agreement file", "answers": [{"name": "find_file", "arguments": {"query": "lease agreement"}}]}
+{"query": "look for the lease agreement", "answers": [{"name": "find_file", "arguments": {"query": "lease agreement"}}]}
+{"query": "locate the project plan file", "answers": [{"name": "find_file", "arguments": {"query": "project plan"}}]}
+{"query": "find my project plan", "answers": [{"name": "find_file", "arguments": {"query": "project plan"}}]}
+{"query": "find project plan", "answers": [{"name": "find_file", "arguments": {"query": "project plan"}}]}
+{"query": "search for project plan", "answers": [{"name": "find_file", "arguments": {"query": "project plan"}}]}
+{"query": "locate the photo of the whiteboard file", "answers": [{"name": "find_file", "arguments": {"query": "photo of the whiteboard"}}]}
+{"query": "find my photo of the whiteboard", "answers": [{"name": "find_file", "arguments": {"query": "photo of the whiteboard"}}]}
+{"query": "find photo of the whiteboard", "answers": [{"name": "find_file", "arguments": {"query": "photo of the whiteboard"}}]}
+{"query": "find the photo of the whiteboard document", "answers": [{"name": "find_file", "arguments": {"query": "photo of the whiteboard"}}]}
+{"query": "look for the quarterly report", "answers": [{"name": "find_file", "arguments": {"query": "quarterly report"}}]}
+{"query": "find quarterly report", "answers": [{"name": "find_file", "arguments": {"query": "quarterly report"}}]}
+{"query": "search my files for quarterly report", "answers": [{"name": "find_file", "arguments": {"query": "quarterly report"}}]}
+{"query": "find my quarterly report", "answers": [{"name": "find_file", "arguments": {"query": "quarterly report"}}]}
+{"query": "find bank statement", "answers": [{"name": "find_file", "arguments": {"query": "bank statement"}}]}
+{"query": "find the bank statement document", "answers": [{"name": "find_file", "arguments": {"query": "bank statement"}}]}
+{"query": "search for bank statement", "answers": [{"name": "find_file", "arguments": {"query": "bank statement"}}]}
+{"query": "where is my bank statement", "answers": [{"name": "find_file", "arguments": {"query": "bank statement"}}]}
+{"query": "open number 1", "answers": [{"name": "open_file", "arguments": {"number": 1}}]}
+{"query": "open file 1", "answers": [{"name": "open_file", "arguments": {"number": 1}}]}
+{"query": "open item 1", "answers": [{"name": "open_file", "arguments": {"number": 1}}]}
+{"query": "open the first result", "answers": [{"name": "open_file", "arguments": {"number": 1}}]}
+{"query": "open number 2", "answers": [{"name": "open_file", "arguments": {"number": 2}}]}
+{"query": "open file 2", "answers": [{"name": "open_file", "arguments": {"number": 2}}]}
+{"query": "open item 2", "answers": [{"name": "open_file", "arguments": {"number": 2}}]}
+{"query": "open the second result", "answers": [{"name": "open_file", "arguments": {"number": 2}}]}
+{"query": "open result 3", "answers": [{"name": "open_file", "arguments": {"number": 3}}]}
+{"query": "open file 3", "answers": [{"name": "open_file", "arguments": {"number": 3}}]}
+{"query": "open item 3", "answers": [{"name": "open_file", "arguments": {"number": 3}}]}
+{"query": "open the third one", "answers": [{"name": "open_file", "arguments": {"number": 3}}]}
+{"query": "open result 4", "answers": [{"name": "open_file", "arguments": {"number": 4}}]}
+{"query": "open number 4", "answers": [{"name": "open_file", "arguments": {"number": 4}}]}
+{"query": "open file 4", "answers": [{"name": "open_file", "arguments": {"number": 4}}]}
+{"query": "open item 4", "answers": [{"name": "open_file", "arguments": {"number": 4}}]}
+{"query": "open result 5", "answers": [{"name": "open_file", "arguments": {"number": 5}}]}
+{"query": "open number 5", "answers": [{"name": "open_file", "arguments": {"number": 5}}]}
+{"query": "open item 5", "answers": [{"name": "open_file", "arguments": {"number": 5}}]}
+{"query": "open the fifth one", "answers": [{"name": "open_file", "arguments": {"number": 5}}]}
+{"query": "open result 6", "answers": [{"name": "open_file", "arguments": {"number": 6}}]}
+{"query": "open file 6", "answers": [{"name": "open_file", "arguments": {"number": 6}}]}
+{"query": "open result 7", "answers": [{"name": "open_file", "arguments": {"number": 7}}]}
+{"query": "open number 7", "answers": [{"name": "open_file", "arguments": {"number": 7}}]}
+{"query": "open file 7", "answers": [{"name": "open_file", "arguments": {"number": 7}}]}
+{"query": "open item 7", "answers": [{"name": "open_file", "arguments": {"number": 7}}]}
+{"query": "play some music", "answers": []}
+{"query": "send a message to mom", "answers": []}
+{"query": "order a pizza", "answers": []}
+{"query": "how tall is everest", "answers": []}
+{"query": "tell me a story", "answers": []}
+{"query": "translate hello to french", "answers": []}
+{"query": "delete this file", "answers": []}
+{"query": "shut down", "answers": []}
+{"query": "restart the computer", "answers": []}
+{"query": "format the drive", "answers": []}
+{"query": "uninstall chrome", "answers": []}
+{"query": "open the pod bay doors", "answers": []}
+{"query": "open photoshop", "answers": []}
+{"query": "launch excel", "answers": []}
+{"query": "do not open notepad", "answers": []}
+{"query": "never mind", "answers": []}
+{"query": "cancel", "answers": []}
+{"query": "uh", "answers": []}
+{"query": "hmm okay", "answers": []}
+{"query": "thank you", "answers": []}
+{"query": "that's all", "answers": []}
+{"query": "who are you", "answers": []}
+{"query": "I'm hungry", "answers": []}
+{"query": "this song is great", "answers": []}
+{"query": "the meeting went well", "answers": []}
+{"query": "move my files to the desktop", "answers": []}
+{"query": "empty the recycle bin", "answers": []}
+{"query": "email the report to john", "answers": []}
+{"query": "set an alarm", "answers": []}
+{"query": "what's on my calendar", "answers": []}
+{"query": "turn on the lights", "answers": []}
+{"query": "call mom", "answers": []}
+{"query": "take a screenshot", "answers": []}
+{"query": "copy this", "answers": []}
+{"query": "rename the file", "answers": []}
+{"query": "close all windows", "answers": []}
+{"query": "log me out", "answers": []}
+{"query": "update windows", "answers": []}
+{"query": "connect to wifi", "answers": []}

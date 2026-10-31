@@ -4,8 +4,9 @@ Offline, push-to-talk voice assistant for Windows, built on Cactus **Whistle**
 (speech to text) and **Needle 3** (on-device tool calling). No API keys, no GPU,
 no network at runtime. Full spec: [BUILD.md](BUILD.md).
 
-**Status: Phase 3 built** (dictation + 12 voice commands across four families).
-Phase 4 (tray, autostart, fine-tune) is not started.
+**Status: Phase 4 in progress.** Dictation, 12 voice commands across four
+families, tray icon, autostart, and the review → fine-tune → evaluate pipeline.
+The production fine-tune is waiting on real data (see "Fine-tuning").
 
 ## Setup (Windows 10/11 x64, Python 3.11 or 3.12)
 
@@ -25,6 +26,19 @@ python run.py --no-paste     # print transcripts only
 python run.py --file a.wav   # transcribe a 16 kHz mono WAV, no mic needed
 python run.py --text "open notepad"            # command path from typed text
 python run.py --file a.wav --command --dry-run # decide + log, execute nothing
+```
+
+### Tray icon and autostart
+
+A microphone icon sits in the system tray. Its colour shows the mode: grey
+ready, blue dictating, green command, amber working, purple waiting for your
+confirmation, red paused. Right-click for **Pause hotkeys**, **Start with
+Windows**, **Open data folder** and **Quit**. Run with `--no-tray` to skip it.
+
+```powershell
+python run.py --autostart on      # Startup-folder shortcut (pythonw, no console)
+python run.py --autostart status
+python run.py --autostart off
 ```
 
 ### Commands (hold Ctrl+Alt+Space)
@@ -78,8 +92,40 @@ set_reminder = 0.15
 find_file = 0.15
 ```
 
-This never makes anything run without your keypress. The real fix is the Phase 4
-fine-tune on your own `data/log.jsonl`.
+This never makes anything run without your keypress. **It is enabled by
+default** for those two tools. The real fix is the Phase 4 fine-tune on your
+own `data/log.jsonl`.
+
+### Fine-tuning (Phase 4)
+
+1. Use the assistant normally; every command is logged.
+2. Review what was logged; only reviewed rows are ever trained on:
+   ```powershell
+   python tools/review_log.py stats
+   python tools/review_log.py review     # Enter=right, n=no tool, f=fix, d=drop
+   ```
+3. Export Needle's training format (optionally plus the cold-start seed set):
+   ```powershell
+   python tools/review_log.py export --seed-data tools/seed_examples.jsonl
+   ```
+4. Train. **Use the Cactus platform**, not a local run:
+   ```powershell
+   $env:NEEDLE_API_KEY = "..."   # cactuscompute.com/dashboard/api-keys
+   needle platform finetune data/finetune/train.jsonl data/finetune/val.jsonl data/finetune/test.jsonl
+   ```
+   A local `needle finetune` LoRA works, but its model has **no confidence
+   score**: every call reports `confidence: None` and the gate (correctly)
+   refuses all commands. Only platform fine-tunes keep the confidence head. The
+   platform run uploads your reviewed transcripts to cactuscompute.com and is
+   billed; the assistant itself stays offline.
+5. Compare before switching, then set `[intent] weights` in `config.toml`:
+   ```powershell
+   python tests/eval_intent.py --cases data/finetune/test.jsonl
+   python tests/eval_intent.py --cases data/finetune/test.jsonl --weights path\to\tuned.cact
+   ```
+
+Grow keyword biasing from what you actually say:
+`python tools/review_log.py vocab` (add `--apply` to append to `data/vocabulary.txt`).
 
 Each utterance prints one line: transcript, audio length, STT time,
 time-to-first-token, decode tokens/sec and release→text latency.
@@ -96,6 +142,8 @@ improve recognition.
   dataset (Needle's `query/tools/answers/reasoning` format). Dictated text is
   **not** logged unless you set `[log] include_dictation = true`. Delete the
   file at any time.
+- `data/corrections.jsonl` holds your review verdicts; `data/finetune/` holds
+  exported training files. Both contain transcripts and are git-ignored.
 - `data/reminders.db` stores your reminder texts and times (cancelled ones are
   kept, marked cancelled). Delete it at any time. Scheduled tasks live under
   `WhistleAssistant\` in Task Scheduler and contain only a reminder number.

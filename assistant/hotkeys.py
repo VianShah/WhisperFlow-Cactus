@@ -77,8 +77,15 @@ class PushToTalk:
             mode, self._active = self._active, None
             self.on_release(mode)
 
-    def run_forever(self):
+    def start(self):
         from pynput import keyboard
-        with keyboard.Listener(on_press=self._press, on_release=self._release) as l:
-            self._listener = l
-            l.join()
+        self._listener = keyboard.Listener(on_press=self._press, on_release=self._release)
+        self._listener.start()
+        return self._listener
+
+    def stop(self):
+        if self._listener is not None:
+            self._listener.stop()
+
+    def run_forever(self):
+        self.start().join()

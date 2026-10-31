@@ -78,7 +78,7 @@ def main():
     import pyperclip
     pyperclip.copy("ORIGINAL-CLIPBOARD")
 
-    threading.Thread(target=run.run_hotkeys, args=(False,), daemon=True).start()
+    threading.Thread(target=run.run_hotkeys, args=(False, False, True), daemon=True).start()
     time.sleep(8 if not a.stub_stt else 2)  # warm-up + listener start
 
     subprocess.run(["xdotool", "search", "--name", "target", "windowactivate", "--sync"], check=False)

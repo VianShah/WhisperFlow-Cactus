@@ -79,10 +79,21 @@ def build_command(cfg, confirm, dry_run=False, reminders=None):
                         reminders=reminders or build_reminders(cfg), files=files)
     engine = IntentEngine(registry, cfg["intent"]["act_threshold"],
                           cfg["intent"]["confirm_threshold"],
-                          cfg["intent"].get("confirm_floor", {}))
+                          cfg["intent"].get("confirm_floor", {}),
+                          weights=_weights(cfg))
     log = Logbook(ROOT / cfg.get("log", {}).get("path", "data/log.jsonl"),
                   cfg.get("log", {}).get("include_dictation", False))
     return CommandPipeline(engine, log, confirm, dry_run=dry_run)
+
+
+def _weights(cfg):
+    from assistant.config import ROOT
+    w = cfg["intent"].get("weights", "")
+    if not w:
+        return None
+    path = (ROOT / w) if not os.path.isabs(w) else w
+    print(f"[intent] using fine-tuned weights {path}")
+    return str(path)
 
 
 def _console_confirm(d) -> bool:
@@ -113,7 +124,7 @@ def run_file(paths: list[str], command: bool = False, dry_run: bool = False) -> 
     return 0
 
 
-def run_hotkeys(no_paste: bool, dry_run: bool = False) -> int:
+def run_hotkeys(no_paste: bool, dry_run: bool = False, no_tray: bool = False) -> int:
     from assistant import config, stt
     from assistant.audio import Recorder
     from assistant.hotkeys import PushToTalk
@@ -127,13 +138,25 @@ def run_hotkeys(no_paste: bool, dry_run: bool = False) -> int:
     confirm_timeout = cfg["intent"].get("confirm_timeout_s", 6)
     pending = {"event": None, "answer": False}
 
+    tray = {"obj": None}
+
+    def ui(state):
+        # The tray is cosmetic: it must never break the hotkey/command path.
+        if tray["obj"] is not None:
+            try:
+                tray["obj"].set_state(state)
+            except Exception as e:
+                print(f"[tray] update failed: {type(e).__name__}: {e}")
+
     def chord_confirm(_decision) -> bool:
         # Confirm = press the command hotkey again; Esc or timeout = cancel.
         # Not Enter/Y: those keystrokes would also reach the focused app.
         ev = threading.Event()
         pending.update(event=ev, answer=False)
+        ui("confirm")
         ev.wait(confirm_timeout)
         pending["event"] = None
+        ui("thinking")
         return pending["answer"]
 
     reminders = build_reminders(cfg)
@@ -149,9 +172,10 @@ def run_hotkeys(no_paste: bool, dry_run: bool = False) -> int:
             pending["answer"] = mode == "command"
             pending["event"].set()
             return
-        if busy.locked():
+        if busy.locked() or (tray["obj"] is not None and tray["obj"].paused):
             return
         active["mode"] = mode
+        ui(mode)
         rec.start()
         print(f"[{mode}] listening…", flush=True)
 
@@ -166,23 +190,30 @@ def run_hotkeys(no_paste: bool, dry_run: bool = False) -> int:
         active["mode"] = None
         released = time.perf_counter()
         audio = rec.stop()
+        ui("thinking")
 
         def work():
             with busy:
-                t = speech.transcribe(audio)
-                if mode == "dictate":
-                    pasted = None if no_paste else paste_text(
-                        t.text,
-                        paste_delay_ms=dcfg.get("paste_delay_ms", 40),
-                        restore_delay_ms=dcfg.get("restore_delay_ms", 250))
-                    e2e = (time.perf_counter() - released) * 1000
-                    print(_line(t, pasted) + f" | release→text {e2e:.0f} ms", flush=True)
-                else:
-                    print(_line(t).replace("[dictate]", "[command]"), flush=True)
-                    row = command.handle(t.text, t.latency_ms)
-                    e2e = (time.perf_counter() - released) * 1000
-                    print(f"[command] route={row['route']} | intent {row['intent_ms']} ms"
-                          f" | release→done {e2e:.0f} ms", flush=True)
+                try:
+                    _work()
+                finally:
+                    ui("idle")
+
+        def _work():
+            t = speech.transcribe(audio)
+            if mode == "dictate":
+                pasted = None if no_paste else paste_text(
+                    t.text,
+                    paste_delay_ms=dcfg.get("paste_delay_ms", 40),
+                    restore_delay_ms=dcfg.get("restore_delay_ms", 250))
+                e2e = (time.perf_counter() - released) * 1000
+                print(_line(t, pasted) + f" | release→text {e2e:.0f} ms", flush=True)
+            else:
+                print(_line(t).replace("[dictate]", "[command]"), flush=True)
+                row = command.handle(t.text, t.latency_ms)
+                e2e = (time.perf_counter() - released) * 1000
+                print(f"[command] route={row['route']} | intent {row['intent_ms']} ms"
+                      f" | release→done {e2e:.0f} ms", flush=True)
         threading.Thread(target=work, daemon=True).start()
 
     # Warm the engine so the first utterance isn't slowed by model load.
@@ -191,9 +222,23 @@ def run_hotkeys(no_paste: bool, dry_run: bool = False) -> int:
     command.engine.decide("warm up")
     print(f"Ready. Hold {cfg['hotkeys']['dictate']} to dictate, "
           f"{cfg['hotkeys']['command']} for a command. Ctrl+C to quit.")
-    PushToTalk({"dictate": cfg["hotkeys"]["dictate"],
-                "command": cfg["hotkeys"]["command"]}, on_press, on_release,
-               on_escape=on_escape).run_forever()
+    ptt = PushToTalk({"dictate": cfg["hotkeys"]["dictate"],
+                      "command": cfg["hotkeys"]["command"]}, on_press, on_release,
+                     on_escape=on_escape)
+    listener = ptt.start()
+    if cfg.get("ui", {}).get("tray", True) and not no_tray:
+        try:
+            from assistant import autostart
+            from assistant.config import ROOT
+            from assistant.tray import Tray
+            tray["obj"] = Tray(on_quit=ptt.stop, data_dir=str(ROOT / "data"),
+                               autostart=autostart.for_this_install())
+            tray["obj"].run()  # blocks until Quit
+            return 0
+        except Exception as e:  # no desktop / no tray host: keep running headless
+            tray["obj"] = None
+            print(f"[tray] unavailable ({type(e).__name__}: {e}); running without it")
+    listener.join()
     return 0
 
 
@@ -216,16 +261,32 @@ def main(argv=None) -> int:
     ap.add_argument("--command", action="store_true", help="with --file: command path")
     ap.add_argument("--dry-run", action="store_true", help="decide and log, never execute")
     ap.add_argument("--fire-reminder", type=int, metavar="ID", help=argparse.SUPPRESS)
+    ap.add_argument("--no-tray", action="store_true", help="run without the tray icon")
+    ap.add_argument("--autostart", choices=["on", "off", "status"],
+                    help="start with Windows (Startup-folder shortcut)")
     a = ap.parse_args(argv)
     if a.setup:
         return setup()
     if a.fire_reminder is not None:
         return fire_reminder(a.fire_reminder)
+    if a.autostart:
+        from assistant import autostart
+        auto = autostart.for_this_install()
+        if auto is None:
+            print("autostart is Windows-only")
+            return 1
+        if a.autostart == "on":
+            print(f"enabled: {auto.enable()}")
+        elif a.autostart == "off":
+            print("disabled" if auto.disable() else "was not enabled")
+        else:
+            print("enabled" if auto.is_enabled() else "disabled", f"({auto.path})")
+        return 0
     if a.text:
         return run_text(a.text, a.dry_run)
     if a.file:
         return run_file(a.file, a.command, a.dry_run)
-    return run_hotkeys(a.no_paste, a.dry_run)
+    return run_hotkeys(a.no_paste, a.dry_run, a.no_tray)
 
 
 if __name__ == "__main__":
