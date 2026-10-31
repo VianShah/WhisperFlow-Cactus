@@ -1,0 +1,8 @@
+# One word or phrase per line. Biases Whistle toward names, places and jargon.
+# Lines starting with # are ignored. Grow this from data/log.jsonl over time.
+Whistle
+Needle
+Cactus
+Notepad
+Spotify
+VS Code

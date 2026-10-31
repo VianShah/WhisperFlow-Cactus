@@ -1,0 +1,26 @@
+[hotkeys]
+dictate = "ctrl+alt+d"
+command = "ctrl+alt+space"
+
+[speech]
+language = "en"
+max_seconds = 30
+vocabulary_file = "data/vocabulary.txt"
+
+[dictation]
+paste_delay_ms = 40        # wait after setting clipboard before Ctrl+V
+restore_delay_ms = 250     # wait after Ctrl+V before restoring old clipboard
+
+[intent]
+act_threshold = 0.75        # above this, execute silently
+confirm_threshold = 0.45    # between the two, ask first; below, refuse
+
+[apps.allowlist]
+notepad = "notepad.exe"
+chrome  = "chrome.exe"
+vscode  = "code"
+spotify = "spotify.exe"
+
+[files]
+everything_cli = "es.exe"
+fallback_roots = ["C:/Users/%USERNAME%/Documents", "C:/Users/%USERNAME%/Desktop"]
