@@ -31,10 +31,12 @@ def _parse(chord: str):
 class PushToTalk:
     def __init__(self, chords: dict[str, str],
                  on_press: Callable[[str], None],
-                 on_release: Callable[[str], None]):
+                 on_release: Callable[[str], None],
+                 on_escape: Callable[[], None] | None = None):
         self.chords = {mode: _parse(c) for mode, c in chords.items()}
         self.on_press = on_press
         self.on_release = on_release
+        self.on_escape = on_escape
         self._down: set = set()
         self._active: str | None = None
         self._listener = None
@@ -57,6 +59,9 @@ class PushToTalk:
         return key
 
     def _press(self, key):
+        from pynput import keyboard
+        if key == keyboard.Key.esc and self.on_escape:
+            self.on_escape()
         self._down.add(self._normalise(key))
         if self._active is None:
             for mode, chord in self.chords.items():

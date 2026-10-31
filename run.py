@@ -3,6 +3,9 @@
   python run.py --setup          one-time: download engine + weights (needs internet)
   python run.py                  push-to-talk: hold Ctrl+Alt+D, speak, release
   python run.py --file x.wav     headless: transcribe a 16 kHz WAV (no mic/hotkeys)
+  python run.py --file x.wav --command   ...and run it through the command path
+  python run.py --text "open notepad"     command path from typed text (no audio)
+  add --dry-run to any command mode to log/decide without executing anything
 """
 from __future__ import annotations
 
@@ -27,21 +30,66 @@ def setup() -> int:
     cfg = config.load()
     s = stt.SpeechToText(cfg["speech"]["language"])
     import numpy as np
-    s.transcribe(np.zeros(16_000, dtype=np.float32))  # forces engine + weights fetch
+    s.transcribe(np.zeros(16_000, dtype=np.float32))  # Whistle engine + weights
+    import needle
+
+    @needle.tool
+    def ping():
+        "Reply to a ping."
+        return {}
+    agent = needle.Needle(tools=[ping], stateless=True)  # Needle 3 engine + weights
+    agent.complete("ping")
+    agent.close()
     print("Models cached. The assistant now runs fully offline.")
     return 0
 
 
-def run_file(paths: list[str]) -> int:
-    from assistant import config, stt
-    cfg = config.load()
-    s = stt.SpeechToText(cfg["speech"]["language"], config.load_vocabulary(cfg))
-    for p in paths:
-        print(_line(s.transcribe(p)))
+def build_command(cfg, confirm, dry_run=False):
+    from assistant.apps_config import allowlist
+    from assistant.intent import IntentEngine, Registry
+    from assistant.logbook import Logbook
+    from assistant.pipeline import CommandPipeline
+    from assistant.tools.apps import AppLauncher
+    from assistant.tools.clock import get_time
+    from assistant.config import ROOT
+
+    registry = Registry(AppLauncher(allowlist(cfg)), get_time)
+    engine = IntentEngine(registry, cfg["intent"]["act_threshold"],
+                          cfg["intent"]["confirm_threshold"])
+    log = Logbook(ROOT / cfg.get("log", {}).get("path", "data/log.jsonl"),
+                  cfg.get("log", {}).get("include_dictation", False))
+    return CommandPipeline(engine, log, confirm, dry_run=dry_run)
+
+
+def _console_confirm(d) -> bool:
+    try:
+        return input("  confirm? [y/N] ").strip().lower() == "y"
+    except EOFError:
+        return False
+
+
+def run_text(queries: list[str], dry_run: bool) -> int:
+    from assistant import config
+    pipe = build_command(config.load(), _console_confirm, dry_run)
+    for q in queries:
+        pipe.handle(q)
     return 0
 
 
-def run_hotkeys(no_paste: bool) -> int:
+def run_file(paths: list[str], command: bool = False, dry_run: bool = False) -> int:
+    from assistant import config, stt
+    cfg = config.load()
+    s = stt.SpeechToText(cfg["speech"]["language"], config.load_vocabulary(cfg))
+    pipe = build_command(cfg, _console_confirm, dry_run) if command else None
+    for p in paths:
+        t = s.transcribe(p)
+        print(_line(t).replace("[dictate]", "[command]" if command else "[dictate]"))
+        if pipe:
+            pipe.handle(t.text, t.latency_ms)
+    return 0
+
+
+def run_hotkeys(no_paste: bool, dry_run: bool = False) -> int:
     from assistant import config, stt
     from assistant.audio import Recorder
     from assistant.hotkeys import PushToTalk
@@ -52,39 +100,71 @@ def run_hotkeys(no_paste: bool) -> int:
     rec = Recorder(cfg["speech"].get("max_seconds", 30))
     dcfg = cfg.get("dictation", {})
     busy = threading.Lock()
+    confirm_timeout = cfg["intent"].get("confirm_timeout_s", 6)
+    pending = {"event": None, "answer": False}
+
+    def chord_confirm(_decision) -> bool:
+        # Confirm = press the command hotkey again; Esc or timeout = cancel.
+        # Not Enter/Y: those keystrokes would also reach the focused app.
+        ev = threading.Event()
+        pending.update(event=ev, answer=False)
+        ev.wait(confirm_timeout)
+        pending["event"] = None
+        return pending["answer"]
+
+    command = build_command(cfg, chord_confirm, dry_run)
+    active = {"mode": None}
 
     def on_press(mode):
-        if mode != "dictate":
-            print(f"[{mode}] not implemented until Phase 2")
+        if pending["event"] is not None:  # answering a confirmation, not recording
+            pending["answer"] = mode == "command"
+            pending["event"].set()
             return
         if busy.locked():
             return
+        active["mode"] = mode
         rec.start()
-        print("[dictate] listening…", flush=True)
+        print(f"[{mode}] listening…", flush=True)
+
+    def on_escape():
+        if pending["event"] is not None:
+            pending["answer"] = False
+            pending["event"].set()
 
     def on_release(mode):
-        if mode != "dictate" or not rec.recording:
+        if mode != active["mode"] or not rec.recording:
             return
+        active["mode"] = None
         released = time.perf_counter()
         audio = rec.stop()
 
         def work():
             with busy:
                 t = speech.transcribe(audio)
-                pasted = None if no_paste else paste_text(
-                    t.text,
-                    paste_delay_ms=dcfg.get("paste_delay_ms", 40),
-                    restore_delay_ms=dcfg.get("restore_delay_ms", 250))
-                e2e = (time.perf_counter() - released) * 1000
-                print(_line(t, pasted) + f" | release→text {e2e:.0f} ms", flush=True)
+                if mode == "dictate":
+                    pasted = None if no_paste else paste_text(
+                        t.text,
+                        paste_delay_ms=dcfg.get("paste_delay_ms", 40),
+                        restore_delay_ms=dcfg.get("restore_delay_ms", 250))
+                    e2e = (time.perf_counter() - released) * 1000
+                    print(_line(t, pasted) + f" | release→text {e2e:.0f} ms", flush=True)
+                else:
+                    print(_line(t).replace("[dictate]", "[command]"), flush=True)
+                    row = command.handle(t.text, t.latency_ms)
+                    e2e = (time.perf_counter() - released) * 1000
+                    print(f"[command] route={row['route']} | intent {row['intent_ms']} ms"
+                          f" | release→done {e2e:.0f} ms", flush=True)
         threading.Thread(target=work, daemon=True).start()
 
     # Warm the engine so the first utterance isn't slowed by model load.
     import numpy as np
     speech.transcribe(np.zeros(1600, dtype=np.float32) + 1e-6)
-    print(f"Ready. Hold {cfg['hotkeys']['dictate']} and speak. Ctrl+C to quit.")
+    command.engine.decide("warm up")
+    print(f"Ready. Hold {cfg['hotkeys']['dictate']} to dictate, "
+          f"{cfg['hotkeys']['command']} for a command. Ctrl+C to quit.")
     PushToTalk({"dictate": cfg["hotkeys"]["dictate"],
-                "command": cfg["hotkeys"]["command"]}, on_press, on_release).run_forever()
+                "command": cfg["hotkeys"]["command"]}, on_press, on_release,
+               on_escape=on_escape).run_forever()
     return 0
 
 
@@ -94,12 +174,17 @@ def main(argv=None) -> int:
     ap.add_argument("--setup", action="store_true", help="download models once")
     ap.add_argument("--file", nargs="+", metavar="WAV", help="transcribe WAV file(s)")
     ap.add_argument("--no-paste", action="store_true", help="print only, don't paste")
+    ap.add_argument("--text", nargs="+", metavar="QUERY", help="run typed command(s)")
+    ap.add_argument("--command", action="store_true", help="with --file: command path")
+    ap.add_argument("--dry-run", action="store_true", help="decide and log, never execute")
     a = ap.parse_args(argv)
     if a.setup:
         return setup()
+    if a.text:
+        return run_text(a.text, a.dry_run)
     if a.file:
-        return run_file(a.file)
-    return run_hotkeys(a.no_paste)
+        return run_file(a.file, a.command, a.dry_run)
+    return run_hotkeys(a.no_paste, a.dry_run)
 
 
 if __name__ == "__main__":

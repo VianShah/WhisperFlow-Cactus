@@ -1,5 +1,6 @@
 cactus-needle[mic]==3.2.8
 pynput>=1.7
 pyperclip>=1.8
+win11toast>=0.35; sys_platform == "win32"
 tomli>=2.0; python_version < "3.11"
 pytest>=8

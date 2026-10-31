@@ -14,6 +14,11 @@ restore_delay_ms = 250     # wait after Ctrl+V before restoring old clipboard
 [intent]
 act_threshold = 0.75        # above this, execute silently
 confirm_threshold = 0.45    # between the two, ask first; below, refuse
+confirm_timeout_s = 6       # confirm by pressing the command hotkey again; Esc/timeout cancels
+
+[log]
+path = "data/log.jsonl"     # your command transcripts; safe to delete at any time
+include_dictation = false   # dictated prose is private and not useful for training
 
 [apps.allowlist]
 notepad = "notepad.exe"

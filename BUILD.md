@@ -112,6 +112,10 @@ section wins.
 | Telemetry | not mentioned | **on by default**: sends anonymous usage events to a Supabase endpoint on every `run`/`complete` call | Violates 8.5. Disabled with `NEEDLE_TELEMETRY=0` (set in `assistant/__init__.py`). |
 | Offline after first run | weights cached | weights come from Hugging Face via `huggingface_hub` | Also set `HF_HUB_OFFLINE=1` at runtime; `run.py --setup` clears it for the one-time download. |
 | Fine-tuning (Phase 4) | lifts accuracy | **local fine-tunes drop the confidence head**; `confidence` becomes `None`. Only platform fine-tunes keep it | Phase 4 must either use the platform fine-tune or redesign the gate. With `None`, the gate refuses everything. |
+| Off-topic requests | "return an empty list rather than a guess" | **only reliably true when arguments are constrained.** With two tools and `open_app(name: str)`, "purple monkey dishwasher" became `open_app("purple monkey dishwasher")` (confidence 0.15) and "open the pod bay doors" scored 0.80 | `open_app.name` is a `Literal` enum built from the allowlist. Measured: nonsense, "open photoshop" and "pod bay doors" all return `[]`; "open vs code" maps to `vscode`; app confidence rose from 0.57–0.83 to 0.84–0.96. |
+| Extra response fields | not mentioned | `suppressed_calls` (e.g. negated requests: "don't open notepad"), `validation.ungrounded`, `validation.negation`, `reasoning`, `peak_ram_mb` | The gate refuses on ungrounded or negated calls even at high confidence. |
+| Confidence on empty answers | not specified | confidence is for the *whole decision*: "delete all my files" returns `[]` with confidence 0.91 | Empty `function_calls` never acts, whatever the score. |
+| Fine-tune data format | not specified | JSONL rows of `{query, tools, answers, reasoning}` | `data/log.jsonl` uses exactly these field names. |
 | Mic capture | capture 16 kHz natively | the package's own mic code opens at the device's native rate and resamples with soxr | `audio.py` asks for 16 kHz first and falls back to native rate + soxr only if the device refuses. |
 
 ### 3.1 Install
