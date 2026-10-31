@@ -62,3 +62,76 @@ def test_no_shell_anywhere_in_source():
                 if kw.arg == "shell" and not (isinstance(kw.value, ast.Constant) and kw.value.value is False):
                     bad.append(f"{path}:{node.lineno} shell={ast.unparse(kw.value)}")
     assert bad == []
+
+
+# ---- Phase 3: windows + system control, with a fake Windows API ----
+from assistant.tools.apps import SystemControl
+
+
+class FakeAPI:
+    def __init__(self, windows=None):
+        self.windows = windows or {}
+        self.calls = []
+
+    def windows_for(self, exe):
+        self.calls.append(("windows_for", exe))
+        return self.windows.get(exe, [])
+
+    def close_window(self, h): self.calls.append(("close", h))
+    def focus_window(self, h): self.calls.append(("focus", h))
+    def set_volume(self, v): self.calls.append(("volume", v))
+    def lock_screen(self): self.calls.append(("lock",))
+    def sleep_display(self): self.calls.append(("sleep",))
+
+
+def test_close_window_matches_process_and_closes_frontmost_only():
+    api = FakeAPI({"notepad.exe": [101, 102]})
+    la = AppLauncher(ALLOW, api=api)
+    assert la.close_window("notepad") == {"ok": True, "closed": "notepad"}
+    assert ("close", 101) in api.calls and ("close", 102) not in api.calls
+
+
+def test_vscode_process_name_derived_from_allowlist():
+    api = FakeAPI({"code.exe": [7]})
+    assert AppLauncher(ALLOW, api=api).focus_window("vscode")["ok"]
+    assert ("focus", 7) in api.calls
+
+
+def test_process_name_override():
+    api = FakeAPI({"spotify.exe": [9]})
+    la = AppLauncher({"music": "C:/x/launcher.exe"}, api=api, process_names={"music": "Spotify.exe"})
+    assert la.focus_window("music")["ok"]
+
+
+def test_window_actions_refuse_unknown_and_missing():
+    api = FakeAPI({})
+    la = AppLauncher(ALLOW, api=api)
+    assert la.close_window("explorer")["ok"] is False
+    assert "no open window" in la.focus_window("notepad")["error"]
+    assert not any(c[0] in ("close", "focus") for c in api.calls)
+
+
+def test_volume_validated_and_coerced():
+    api = FakeAPI()
+    sc = SystemControl(api)
+    assert sc.set_volume("30") == {"ok": True, "volume": 30}  # Needle sometimes sends a string
+    assert sc.set_volume(150)["ok"] is False
+    assert sc.set_volume(-1)["ok"] is False
+    assert sc.set_volume("loud")["ok"] is False
+    assert sc.set_volume("mute") == {"ok": True, "volume": 0}  # observed model output
+    assert sc.set_volume("80%") == {"ok": True, "volume": 80}
+    assert api.calls == [("volume", 30), ("volume", 0), ("volume", 80)]
+
+
+def test_lock_and_sleep():
+    api = FakeAPI()
+    sc = SystemControl(api)
+    assert sc.lock_screen()["ok"] and sc.sleep_display()["ok"]
+    assert api.calls == [("lock",), ("sleep",)]
+
+
+def test_non_windows_reports_cleanly():
+    sc = SystemControl(api=False)
+    assert "only available on Windows" in sc.lock_screen()["error"]
+    la = AppLauncher(ALLOW, api=False)
+    assert "only available on Windows" in la.close_window("notepad")["error"]

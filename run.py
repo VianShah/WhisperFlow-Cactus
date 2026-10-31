@@ -44,18 +44,42 @@ def setup() -> int:
     return 0
 
 
-def build_command(cfg, confirm, dry_run=False):
+def build_reminders(cfg):
+    from assistant.config import ROOT
+    from assistant.notify import notify
+    from assistant.tools import reminders as rem
+
+    rcfg = cfg.get("reminders", {})
+    py = sys.executable
+    if sys.platform == "win32" and py.lower().endswith("python.exe"):
+        py = py[:-len("python.exe")] + "pythonw.exe"  # no console window when firing
+    sched = rem.choose_scheduler(rcfg.get("backend", "auto"), py,
+                                 str(ROOT / "run.py"), str(ROOT))
+    print(f"[reminders] backend: {sched.name}")
+    return rem.Reminders(rem.Store(ROOT / rcfg.get("db", "data/reminders.db")), sched, notify)
+
+
+def build_command(cfg, confirm, dry_run=False, reminders=None):
     from assistant.apps_config import allowlist
     from assistant.intent import IntentEngine, Registry
     from assistant.logbook import Logbook
     from assistant.pipeline import CommandPipeline
-    from assistant.tools.apps import AppLauncher
+    from assistant.tools.apps import AppLauncher, SystemControl
     from assistant.tools.clock import get_time
+    from assistant.tools.files import FileSearch
     from assistant.config import ROOT
 
-    registry = Registry(AppLauncher(allowlist(cfg)), get_time)
+    fcfg = cfg.get("files", {})
+    files = FileSearch(fcfg.get("everything_cli", "es.exe"), fcfg.get("fallback_roots", []),
+                       fcfg.get("max_results", 10), fcfg.get("timeout_s", 4.0))
+    print(f"[files] backend: {files.backend}")
+    registry = Registry(AppLauncher(allowlist(cfg),
+                                    process_names=cfg.get("apps", {}).get("process_names")),
+                        get_time, system=SystemControl(),
+                        reminders=reminders or build_reminders(cfg), files=files)
     engine = IntentEngine(registry, cfg["intent"]["act_threshold"],
-                          cfg["intent"]["confirm_threshold"])
+                          cfg["intent"]["confirm_threshold"],
+                          cfg["intent"].get("confirm_floor", {}))
     log = Logbook(ROOT / cfg.get("log", {}).get("path", "data/log.jsonl"),
                   cfg.get("log", {}).get("include_dictation", False))
     return CommandPipeline(engine, log, confirm, dry_run=dry_run)
@@ -112,7 +136,12 @@ def run_hotkeys(no_paste: bool, dry_run: bool = False) -> int:
         pending["event"] = None
         return pending["answer"]
 
-    command = build_command(cfg, chord_confirm, dry_run)
+    reminders = build_reminders(cfg)
+    missed = reminders.fire_due()  # anything that came due while we were off
+    if missed:
+        print(f"[reminders] fired {missed} missed reminder(s)")
+    reminders.start_poller()
+    command = build_command(cfg, chord_confirm, dry_run, reminders)
     active = {"mode": None}
 
     def on_press(mode):
@@ -168,6 +197,15 @@ def run_hotkeys(no_paste: bool, dry_run: bool = False) -> int:
     return 0
 
 
+def fire_reminder(rid: int) -> int:
+    """Entry point for Task Scheduler: show reminder <rid> once."""
+    from assistant import config
+    r = build_reminders(config.load())
+    r.fire(rid)
+    time.sleep(3)  # let the toast thread show before the process exits
+    return 0
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -177,9 +215,12 @@ def main(argv=None) -> int:
     ap.add_argument("--text", nargs="+", metavar="QUERY", help="run typed command(s)")
     ap.add_argument("--command", action="store_true", help="with --file: command path")
     ap.add_argument("--dry-run", action="store_true", help="decide and log, never execute")
+    ap.add_argument("--fire-reminder", type=int, metavar="ID", help=argparse.SUPPRESS)
     a = ap.parse_args(argv)
     if a.setup:
         return setup()
+    if a.fire_reminder is not None:
+        return fire_reminder(a.fire_reminder)
     if a.text:
         return run_text(a.text, a.dry_run)
     if a.file:

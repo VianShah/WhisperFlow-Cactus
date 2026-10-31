@@ -16,6 +16,13 @@ act_threshold = 0.75        # above this, execute silently
 confirm_threshold = 0.45    # between the two, ask first; below, refuse
 confirm_timeout_s = 6       # confirm by pressing the command hotkey again; Esc/timeout cancels
 
+# Optional, per tool: lower the refuse/confirm boundary so a low-confidence call
+# is *offered for confirmation* instead of refused. Never makes anything run
+# without your keypress. Empty = the spec's behaviour. See README "Tuning".
+[intent.confirm_floor]
+# set_reminder = 0.15
+# find_file = 0.15
+
 [log]
 path = "data/log.jsonl"     # your command transcripts; safe to delete at any time
 include_dictation = false   # dictated prose is private and not useful for training
@@ -26,6 +33,18 @@ chrome  = "chrome.exe"
 vscode  = "code"
 spotify = "spotify.exe"
 
+# Windows are matched by process name. Defaults to the allowlist exe name
+# (vscode = "code" -> code.exe); override here if an app's process differs.
+[apps.process_names]
+spotify = "spotify.exe"
+
+[reminders]
+backend = "auto"            # auto | local | outlook   (auto = Outlook if installed)
+db = "data/reminders.db"    # your reminder texts; safe to delete
+
 [files]
-everything_cli = "es.exe"
-fallback_roots = ["C:/Users/%USERNAME%/Documents", "C:/Users/%USERNAME%/Desktop"]
+everything_cli = "es.exe"   # voidtools Everything CLI; falls back to a slow folder walk
+fallback_roots = ["C:/Users/%USERNAME%/Documents", "C:/Users/%USERNAME%/Desktop",
+                  "C:/Users/%USERNAME%/Downloads"]
+max_results = 10
+timeout_s = 4.0

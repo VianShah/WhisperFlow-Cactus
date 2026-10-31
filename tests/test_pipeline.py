@@ -12,6 +12,7 @@ def make(conf, calls=CALL, confirm=False):
     eng.decide.side_effect = lambda q: gate(Decision(q, calls, conf), 0.75, 0.45)
     eng.registry.dispatch.return_value = [{"ok": True, "opened": "notepad"}]
     eng.registry.schemas = []
+    eng.registry.preview.side_effect = lambda c: c["name"]
     log, notes = mock.Mock(), []
     p = CommandPipeline(eng, log, confirm=lambda d: confirm,
                         notify=lambda t, b: notes.append((t, b)))

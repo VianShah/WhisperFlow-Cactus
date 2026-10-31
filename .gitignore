@@ -6,3 +6,4 @@ data/log.jsonl
 # audio is never written to disk except explicit dev fixtures (spec 8.4)
 *.wav
 !tests/fixtures/*.wav
+data/reminders.db

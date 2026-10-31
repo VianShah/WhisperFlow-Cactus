@@ -116,6 +116,14 @@ section wins.
 | Extra response fields | not mentioned | `suppressed_calls` (e.g. negated requests: "don't open notepad"), `validation.ungrounded`, `validation.negation`, `reasoning`, `peak_ram_mb` | The gate refuses on ungrounded or negated calls even at high confidence. |
 | Confidence on empty answers | not specified | confidence is for the *whole decision*: "delete all my files" returns `[]` with confidence 0.91 | Empty `function_calls` never acts, whatever the score. |
 | Fine-tune data format | not specified | JSONL rows of `{query, tools, answers, reasoning}` | `data/log.jsonl` uses exactly these field names. |
+| Tool retrieval (12 tools) | keep schemas terse | `@needle.tool(triggers=[...])` matters a lot. Measured on 42 commands: right tool 31 → 41, wrong calls with confidence ≥ 0.75: 5 → 0. A system prompt made no difference. | Every tool has triggers (see `intent.py`). |
+| Confidence on correct calls | calibrated | correct `set_reminder` / `find_file` calls mostly score 0.15–0.40, so the 8.1 gate refuses them | Optional `[intent.confirm_floor]` per tool (only refuse→confirm, never auto-run). Default off. Phase 4 fine-tune is the real fix. |
+| Grounding check | not mentioned | flags `set_reminder.when` when the model writes "one minute" as "in 1 minute" | For that one field we use our own check (number words → digits); all other flags still refuse. |
+| Transcript punctuation | not mentioned | "Set the volume to 50." → no tool (0.00); without the final "." → `set_volume` (0.96) | Final `.?!` is stripped before Needle. Lower-casing everything was worse. |
+| Integer args | typed | `set_volume.level` sometimes arrives as a string (`"30"`, `"mute"`) | Executors coerce and validate; "mute"/"max" map to 0/100. |
+| Date parsing (6.3) | `dateparser` or `dateutil` | `dateparser` is wrong on spoken times: "tomorrow at six" → tomorrow 19:50, "at 4" → April next year, "6 pm" → a past date | `assistant/timeparse.py`: rules for spoken forms, dateparser only for explicit dates, result must be future and < 1 year. |
+| `open_file(path)` (6.3) | path from a prior `find_file` | a path cannot be spoken, and the agent is stateless | `open_file(number)` indexes the last results, so the rule is structural. Executable types are revealed in Explorer, never opened (opening = running). |
+| `schtasks` | wake-up for reminders | `/SD` date format depends on the Windows locale | Tasks are registered from XML (`/XML`), ISO times, `StartWhenAvailable`. |
 | Mic capture | capture 16 kHz natively | the package's own mic code opens at the device's native rate and resamples with soxr | `audio.py` asks for 16 kHz first and falls back to native rate + soxr only if the device refuses. |
 
 ### 3.1 Install

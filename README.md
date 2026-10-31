@@ -4,8 +4,8 @@ Offline, push-to-talk voice assistant for Windows, built on Cactus **Whistle**
 (speech to text) and **Needle 3** (on-device tool calling). No API keys, no GPU,
 no network at runtime. Full spec: [BUILD.md](BUILD.md).
 
-**Status: Phase 2 (intent layer) built.** Dictation + voice commands `get_time` and
-`open_app`. Phases 3–4 are placeholders.
+**Status: Phase 3 built** (dictation + 12 voice commands across four families).
+Phase 4 (tray, autostart, fine-tune) is not started.
 
 ## Setup (Windows 10/11 x64, Python 3.11 or 3.12)
 
@@ -29,9 +29,20 @@ python run.py --file a.wav --command --dry-run # decide + log, execute nothing
 
 ### Commands (hold Ctrl+Alt+Space)
 
-"What time is it?" and "Open notepad / chrome / spotify / VS Code". Apps must be
-in `[apps.allowlist]` in `config.toml`; the model can only pick a name from that
-list, and the program maps it to the configured executable.
+| Family | Say things like | Notes |
+|---|---|---|
+| Time | "What time is it?" | |
+| Apps | "Open / close / switch to notepad, chrome, spotify, VS Code" | only apps in `[apps.allowlist]`; close = like clicking X (the app may ask to save) |
+| System | "Set the volume to 30", "Mute the volume", "Lock the screen", "Turn off the display" | |
+| Reminders | "Remind me to call mom tomorrow at six", "What are my reminders?", "Cancel reminder 3" | the exact resolved time is shown back; cancelling always asks first |
+| Files | "Find my budget spreadsheet", then "Open result 2" | programs/scripts are shown in Explorer, never run |
+
+Apps are matched by process name, so "switch to spotify" works even though
+Spotify's window title is the song. Reminders use Windows Task Scheduler (or
+Outlook, if installed) so they fire even if the assistant is closed; ones missed
+while the PC was off fire at next startup. For instant file search install
+[Everything](https://www.voidtools.com/) and put `es.exe` on PATH; otherwise the
+assistant walks Documents/Desktop/Downloads, which is slower.
 
 Every command shows what was heard and what was done. Routing by the model's
 confidence (thresholds in `config.toml`):
@@ -44,6 +55,31 @@ confidence (thresholds in `config.toml`):
 
 Confirmation uses the hotkey rather than Enter/Y because those keystrokes would
 also reach whatever app is focused.
+
+### Tuning: what to expect before fine-tuning (Phase 4)
+
+Measured on the base Needle 3 model with `python tests/eval_intent.py` (60
+commands, 5 per tool, plus 11 nonsense/unsafe phrases):
+
+| | typed text | neural-voice audio → Whistle |
+|---|---|---|
+| right tool and arguments | 59/60 | 50–52/60 |
+| …of those: runs immediately / asks first / refused (low confidence) | 29 / 13 / 17 | 21–25 / 11–15 / 13–19 |
+| wrong action run without asking | **0** | **0** |
+| nonsense that reached "asks first" | 0/11 | 0–1/11 |
+
+Correct reminders and file searches mostly score 0.15–0.40, so with the
+spec's thresholds they are **refused** and nothing happens. To have them offered
+for confirmation instead, uncomment in `config.toml`:
+
+```toml
+[intent.confirm_floor]
+set_reminder = 0.15
+find_file = 0.15
+```
+
+This never makes anything run without your keypress. The real fix is the Phase 4
+fine-tune on your own `data/log.jsonl`.
 
 Each utterance prints one line: transcript, audio length, STT time,
 time-to-first-token, decode tokens/sec and release→text latency.
@@ -60,6 +96,9 @@ improve recognition.
   dataset (Needle's `query/tools/answers/reasoning` format). Dictated text is
   **not** logged unless you set `[log] include_dictation = true`. Delete the
   file at any time.
+- `data/reminders.db` stores your reminder texts and times (cancelled ones are
+  kept, marked cancelled). Delete it at any time. Scheduled tasks live under
+  `WhistleAssistant\` in Task Scheduler and contain only a reminder number.
 - `cactus-needle` sends anonymous usage telemetry by default. This project turns
   it off (`NEEDLE_TELEMETRY=0`) and forces Hugging Face offline mode at runtime.
 
@@ -69,9 +108,15 @@ improve recognition.
 xvfb-run -a python tests/e2e_xvfb.py tests/fixtures/dictation_01.wav   # dictation
 xvfb-run -a python tests/e2e_command_xvfb.py                           # Phase 2 gate
 xvfb-run -a python tests/e2e_command_xvfb.py --confirm                 # confirm flow
+xvfb-run -a python tests/e2e_phase3_xvfb.py                            # four families
+python tests/eval_intent.py [--voice]                                  # accuracy report
 ```
 
 This runs the real hotkey listener, Whistle, clipboard and Ctrl+V into a Tk text
 box on a virtual display, and feeds a WAV file in place of the microphone.
-Needs `xvfb xclip xdotool python3-tk`. The command harness puts a stub
-`notepad.exe` on PATH, so a real process launch is checked without Windows.
+Needs `xvfb xclip xdotool python3-tk`. The command harnesses put stub
+`notepad.exe` / `xdg-open` programs on PATH, so real process launches are
+checked without Windows. Window control, volume, lock, display, toasts, Task
+Scheduler and Outlook are Windows-only: they are unit-tested against fakes here
+and **need checking on a real Windows PC**. For `--voice` with a human-like
+voice, `pip install piper-tts`, download a Piper voice and set `PIPER_VOICE`.
